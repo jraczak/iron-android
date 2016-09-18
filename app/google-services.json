@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "318434523333",
+    "firebase_url": "https://squad-goals-586fc.firebaseio.com",
+    "project_id": "squad-goals-586fc",
+    "storage_bucket": "squad-goals-586fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318434523333:android:d326a48505bbab02",
+        "android_client_info": {
+          "package_name": "com.justinraczak.android.squadgoals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "318434523333-vn0k50ba3cc22c79p1t9jbt5o0aer9oh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.justinraczak.android.squadgoals",
+            "certificate_hash": "05B031779931E686BF3B03A73841227DA43F6181"
+          }
+        },
+        {
+          "client_id": "318434523333-ocq11reu7th2uh8le4fqac1gjlt315qv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgVYp50RF7j0dVmb4oqUft-jYmM7CV_m8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318434523333-ocq11reu7th2uh8le4fqac1gjlt315qv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
