@@ -23,5 +23,11 @@ public class SquadGoals extends Application {
                 .build();
 
         Realm.setDefaultConfiguration(defaultConfig);
+
+        RealmConfiguration exerciseConfig = new RealmConfiguration.Builder()
+                .name("exercises.realm")
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
     }
 }
