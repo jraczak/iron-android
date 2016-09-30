@@ -1,0 +1,47 @@
+{
+  "exercises": [
+    {
+      "id": 1,
+      "name": "Barbell Chest Press",
+      "primaryMuscle": "chest",
+      "secondaryMuscle": "triceps",
+      "equipment": "barbell"
+    },
+    {
+      "id": 2,
+      "name": "Dumbbell Chest Press",
+      "primaryMuscle": "chest",
+      "secondaryMuscle": "triceps",
+      "equipment": "dumbbells"
+    },
+    {
+      "id": 3,
+      "name": "Incline Barbell Chest Press",
+      "primaryMuscle": "chest",
+      "secondaryMuscle": "triceps",
+      "equipment": "barbell"
+    },
+    {
+      "id": 4,
+      "name": "Decline Barbell Chest Press",
+      "primaryMuscle": "chest",
+      "secondaryMuscle": "triceps",
+      "equipment": "barbell"
+    },
+    {
+      "id": 5,
+      "name": "Incline Dumbbell Chest Press",
+      "primaryMuscle": "chest",
+      "secondaryMuscle": "triceps",
+      "equipment": "dumbbells"
+    },
+    {
+      "id": 6,
+      "name": "Decline Dumbbell Chest Press",
+      "primaryMuscle": "chest",
+      "secondaryMuscle": "triceps",
+      "equipment": "dumbbells"
+    }
+  ]
+}
+}
