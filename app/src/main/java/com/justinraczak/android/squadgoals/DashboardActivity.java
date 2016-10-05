@@ -33,8 +33,8 @@ public class DashboardActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        onCreateDrawer();
 
         Realm realm = Realm.getDefaultInstance();
 
@@ -53,15 +53,7 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
+        //TODO: Remove this sign out button
         Button signOutButton = (Button) findViewById(R.id.button_sign_out);
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +65,29 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
 
-
+        //TODO: Remove this data tester
         updateUserName();
+    }
+
+    //@Override
+    protected void onCreateDrawer() {
+        Log.d(TAG, "onCreateDrawer called");
+        //super.onCreate(savedInstanceState);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        Log.d(TAG, "Drawer is " + drawer);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     public void updateUserName() {
