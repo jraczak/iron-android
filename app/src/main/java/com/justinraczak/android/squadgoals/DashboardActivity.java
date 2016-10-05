@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.justinraczak.android.squadgoals.models.Exercise;
 
 import io.realm.Realm;
@@ -28,6 +29,8 @@ public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = DashboardActivity.class.getSimpleName();
+
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,16 +80,28 @@ public class DashboardActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        Log.d(TAG, "Drawer is " + drawer);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //TODO: Figure out if this should work or remove it
+        //if (mDrawerLayout == null) {
+        //    LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        //    mDrawerLayout = (DrawerLayout) inflater.inflate(R.layout.activity_dashboard, null);
+        //}
+        //Log.d(TAG, "Drawer is " + mDrawerLayout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View header = navigationView.getHeaderView(0);
+        TextView userName = (TextView) header.findViewById(R.id.nav_user_name);
+        TextView userEmail = (TextView) header.findViewById(R.id.nav_user_email);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        userName.setText(user.getDisplayName());
+        userEmail.setText(user.getEmail());
 
     }
 
