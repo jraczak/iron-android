@@ -25,7 +25,8 @@ public class LogWorkoutActivity extends DashboardActivity {
                         .setAction("Action", null).show();
             }
         });
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle("Log a workout");
     }
 
 }
