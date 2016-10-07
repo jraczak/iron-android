@@ -116,4 +116,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="dialog_select_exercise_header">Select an exercise</string>
+
 </resources>
