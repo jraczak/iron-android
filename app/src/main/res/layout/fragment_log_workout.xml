@@ -11,5 +11,19 @@
     tools:context="com.justinraczak.android.squadgoals.LogWorkoutActivityFragment"
     tools:showIn="@layout/activity_log_workout">
 
+    <TextView
+        android:id="@+id/log_workout_intro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log your workout by adding exercises and saving sets."/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/log_workout_intro"
+        android:background="@color/accent"
+        android:textColor="@android:color/white"
+        android:text="Add execise"/>
+
 
 </RelativeLayout>
