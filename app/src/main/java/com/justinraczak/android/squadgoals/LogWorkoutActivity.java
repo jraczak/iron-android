@@ -31,8 +31,11 @@ implements SelectExerciseFragment.OnExerciseSelectedListener{
         getSupportActionBar().setTitle("Log a workout");
     }
 
-    public void onExerciseSelected(int position) {
-        Toast.makeText(this, "Selected an exercise in the dialog", Toast.LENGTH_SHORT).show();
+    public void onExerciseSelected(int position, String name) {
+        Toast.makeText(this, "Tapped on " + name, Toast.LENGTH_SHORT).show();
+        getFragmentManager().beginTransaction()
+                .remove(getFragmentManager().findFragmentByTag("SELECT_EXERCISE_FRAGMENT"))
+                .commit();
     }
 
 }

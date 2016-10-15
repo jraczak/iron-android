@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -26,7 +25,6 @@ public class LogWorkoutActivityFragment extends Fragment {
         addExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Tried to add exercise", Toast.LENGTH_LONG).show();
                 showSelectExerciseDialog();
             }
         });
@@ -44,7 +42,7 @@ public class LogWorkoutActivityFragment extends Fragment {
         //fragmentTransaction.replace(R.id.fragment, selectExerciseFragment)
         //        .addToBackStack(null).commit();
 
-        selectExerciseFragment.show(fragmentManager, "dialog");
+        selectExerciseFragment.show(fragmentManager, "SELECT_EXERCISE_FRAGMENT");
 
     }
 
