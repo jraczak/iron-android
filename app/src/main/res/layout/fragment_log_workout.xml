@@ -11,6 +11,11 @@
     tools:context="com.justinraczak.android.squadgoals.LogWorkoutActivityFragment"
     tools:showIn="@layout/activity_log_workout">
 
+    <FrameLayout
+        android:id="@+id/frame_select_exercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></FrameLayout>
+
     <TextView
         android:id="@+id/log_workout_intro"
         android:layout_width="match_parent"

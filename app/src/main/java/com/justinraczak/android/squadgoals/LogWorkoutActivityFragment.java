@@ -1,6 +1,7 @@
 package com.justinraczak.android.squadgoals;
 
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,9 +27,24 @@ public class LogWorkoutActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Tried to add exercise", Toast.LENGTH_LONG).show();
+                showSelectExerciseDialog();
             }
         });
         return view;
+
+    }
+
+    public void showSelectExerciseDialog() {
+        FragmentManager fragmentManager = getFragmentManager();
+        SelectExerciseFragment selectExerciseFragment = new SelectExerciseFragment();
+
+        //TODO: Figure out how to make this full screen instead of small pop-up dialog
+        //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        //fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        //fragmentTransaction.replace(R.id.fragment, selectExerciseFragment)
+        //        .addToBackStack(null).commit();
+
+        selectExerciseFragment.show(fragmentManager, "dialog");
 
     }
 

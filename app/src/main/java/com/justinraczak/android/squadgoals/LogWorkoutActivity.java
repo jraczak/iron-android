@@ -5,8 +5,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
-public class LogWorkoutActivity extends DashboardActivity {
+public class LogWorkoutActivity extends DashboardActivity
+implements SelectExerciseFragment.OnExerciseSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,10 @@ public class LogWorkoutActivity extends DashboardActivity {
         });
         //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle("Log a workout");
+    }
+
+    public void onExerciseSelected(int position) {
+        Toast.makeText(this, "Selected an exercise in the dialog", Toast.LENGTH_SHORT).show();
     }
 
 }
