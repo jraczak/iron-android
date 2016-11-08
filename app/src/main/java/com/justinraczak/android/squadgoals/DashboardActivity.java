@@ -101,8 +101,9 @@ public class DashboardActivity extends AppCompatActivity
         TextView userName = (TextView) header.findViewById(R.id.nav_user_name);
         TextView userEmail = (TextView) header.findViewById(R.id.nav_user_email);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        userName.setText(user.getDisplayName());
-        userEmail.setText(user.getEmail());
+        //TODO: Restore setting user's name and email once Firebase issue is fixed
+        //userName.setText(user.getDisplayName());
+        //userEmail.setText(user.getEmail());
 
     }
 

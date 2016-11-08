@@ -181,6 +181,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    private void createAccount(String email, String password){
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this, "Unfortunately authentication failed",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, REQUEST_CODE_SIGN_IN);
@@ -292,6 +308,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
+        Log.d(TAG, "storing text field values");
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
@@ -454,22 +471,38 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
+            mAuth.signInWithEmailAndPassword(mEmail, mPassword)
+                    .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+
+                            if (!task.isSuccessful()) {
+                                Log.w(TAG, "signInWithEmail:failed", task.getException());
+                                Toast.makeText(LoginActivity.this, "Unfortunately sign in failed",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
+            //try {
+            //    // Simulate network access.
+            //    Thread.sleep(2000);
+            //} catch (InterruptedException e) {
+            //    return false;
+            //}
+//
+            //for (String credential : DUMMY_CREDENTIALS) {
+            //    String[] pieces = credential.split(":");
+            //    if (pieces[0].equals(mEmail)) {
+            //        // Account exists, return true if the password matches.
+            //        return pieces[1].equals(mPassword);
+            //    }
+            //}
 
             // TODO: register the new account here.
+            createAccount(mEmail, mPassword);
             return true;
         }
 
@@ -479,7 +512,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                finish();
+                //finish();
+                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                startActivity(intent);
+                Log.d(TAG, "User is " + mAuth.getCurrentUser().getDisplayName());
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
