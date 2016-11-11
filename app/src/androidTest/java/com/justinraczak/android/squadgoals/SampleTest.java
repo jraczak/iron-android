@@ -88,7 +88,7 @@ public class SampleTest {
     private void allowPermissionsIfNeeded()  {
         //  mDevice = UiDevice.getInstance(getInstrumentation());
         if (Build.VERSION.SDK_INT >= 23) {
-            UiObject allowPermissions = UiDevice.getInstance(getInstrumentation()).findObject(new UiSelector().text("Allow"));
+            UiObject allowPermissions = UiDevice.getInstance(getInstrumentation()).findObject(new UiSelector().text("ALLOW"));
             if (allowPermissions.exists()) {
                 try {
                     Log.d("acceptPermissionScript", "Trying to click accept dialog");
@@ -99,4 +99,9 @@ public class SampleTest {
             }
         }
     }
+
+    //public static void acceptCurrentPermission(UiDevice device) throws UiObjectNotFoundException {
+    //    UiObject denyButton = device.findObject(new UiSelector().text("Allow"));
+    //    denyButton.click();
+    //}
 }
