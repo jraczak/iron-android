@@ -15,9 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import com.xamarin.testcloud.espresso.Factory;
+import com.xamarin.testcloud.espresso.ReportHelper;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +34,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
+
+
+
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class SampleTest {
@@ -37,11 +44,16 @@ public class SampleTest {
     @Rule
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
+    @Rule
+    public ReportHelper reportHelper = Factory.getReportHelper();
+
     @Test
     public void sampleTest() {
 
+        reportHelper.label("Given I accept contacts permissions");
         allowPermissionsIfNeeded();
 
+        reportHelper.label("Then I should see the app name");
         ViewInteraction textView = onView(
                 allOf(withText("Squad Goals"),
                         childAtPosition(
@@ -53,6 +65,7 @@ public class SampleTest {
                         isDisplayed()));
         textView.check(matches(withText("Squad Goals")));
 
+        reportHelper.label("And I should see the email sign in button");
         ViewInteraction button = onView(
                 allOf(withId(R.id.email_sign_in_button),
                         childAtPosition(
@@ -104,4 +117,9 @@ public class SampleTest {
     //    UiObject denyButton = device.findObject(new UiSelector().text("Allow"));
     //    denyButton.click();
     //}
+
+    @After
+    public void TearDown() {
+        reportHelper.label("Stopping app");
+    }
 }
