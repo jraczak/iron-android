@@ -190,7 +190,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
                         if (!task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Unfortunately authentication failed",
+                            Toast.makeText(LoginActivity.this, "Unfortunately account creation failed",
                                     Toast.LENGTH_LONG).show();
                         }
                     }
@@ -203,7 +203,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void signInWithEmail() {
-        mAuth.signInWithEmailAndPassword(mEmailView.getText().toString(), mPasswordView.getText().toString())
+        final String email = mEmailView.getText().toString();
+        final String password = mPasswordView.getText().toString();
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -214,6 +216,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
                             Toast.makeText(LoginActivity.this, "Unfortunately sign in failed",
                                     Toast.LENGTH_LONG).show();
+                            createAccount(email, password);
                         } else {
                             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                             startActivity(intent);
