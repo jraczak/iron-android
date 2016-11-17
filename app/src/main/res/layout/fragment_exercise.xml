@@ -7,13 +7,15 @@
     android:orientation="vertical"
     tools:context="com.justinraczak.android.squadgoals.ExerciseFragment"
     android:layout_gravity="center"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
     card_view:cardBackgroundColor="@color/primary_light"
     card_view:contentPaddingLeft="16dp"
     card_view:contentPaddingTop="24dp"
     card_view:contentPaddingRight="16dp"
     card_view:contentPaddingBottom="24dp"
-    card_view:cardElevation="8dp"
-    card_view:cardCornerRadius="10dp">
+    card_view:cardElevation="2dp"
+    card_view:cardCornerRadius="2dp">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

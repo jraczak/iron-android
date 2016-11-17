@@ -80,8 +80,8 @@ public class ExerciseFragment extends Fragment {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        params.setMargins(8, 8, 8, 8);
-        view.setLayoutParams(params);
+        //params.setMargins(8, 8, 8, 8);
+        //view.setLayoutParams(params);
 
         //view.setCardElevation(2);
         //view.setCardBackgroundColor(getResources().getColor(R.color.primary_light));
