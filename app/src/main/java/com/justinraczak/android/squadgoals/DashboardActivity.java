@@ -101,8 +101,12 @@ public class DashboardActivity extends AppCompatActivity
         TextView userName = (TextView) header.findViewById(R.id.nav_user_name);
         TextView userEmail = (TextView) header.findViewById(R.id.nav_user_email);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        userName.setText(user.getDisplayName());
-        userEmail.setText(user.getEmail());
+
+        //Protect this from null pointer exceptions
+        if (user != null) {
+            userName.setText(user.getDisplayName());
+            userEmail.setText(user.getEmail());
+        }
 
     }
 

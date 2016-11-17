@@ -31,5 +31,12 @@
         android:textColor="@android:color/white"
         android:text="Add execise"/>
 
+    <LinearLayout
+        android:id="@+id/exercise_fragment_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/button_add_exercise"></LinearLayout>
+
 
 </RelativeLayout>
