@@ -28,7 +28,7 @@ implements SelectExerciseFragment.OnExerciseSelectedListener{
             }
         });
         //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setTitle("Log a workout");
+        getSupportActionBar().setTitle("Log workout");
     }
 
     public void onExerciseSelected(int position, String name) {
