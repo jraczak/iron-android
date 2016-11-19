@@ -72,7 +72,10 @@ public class ExerciseFragment extends Fragment {
         ViewGroup parentContainer = (ViewGroup) getActivity().findViewById(R.id.exercise_fragment_container);
         CardView view = (CardView) inflater.inflate(R.layout.fragment_exercise, container, false);
         TextView textView = (TextView) view.findViewById(R.id.exercise_name);
+        TextView setCountTextView = (TextView) view.findViewById(R.id.set_count);
         textView.setText(this.exerciseName);
+        setCountTextView.setText(this.setCount + " " + getResources().getString(R.string.sets_label));
+
         Log.d(LOG_TAG, "setting layout params of card");
         //view.setPadding(16, 24, 16, 24);
 
