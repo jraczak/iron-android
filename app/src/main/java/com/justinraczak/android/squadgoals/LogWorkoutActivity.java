@@ -33,6 +33,9 @@ ExerciseFragment.OnFragmentInteractionListener {
         });
         //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle("Log workout");
+
+        //TODO: Check if a workout already exists for this date before creating a new one
+
     }
 
     public void onExerciseSelected(int position, String name) {

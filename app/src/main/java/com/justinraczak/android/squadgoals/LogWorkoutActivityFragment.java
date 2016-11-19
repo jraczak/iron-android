@@ -3,17 +3,36 @@ package com.justinraczak.android.squadgoals;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.justinraczak.android.squadgoals.models.Workout;
+
+import java.util.Date;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class LogWorkoutActivityFragment extends Fragment {
 
+    private final static String LOG_TAG = LogWorkoutActivityFragment.class.getSimpleName();
+
+    private Workout workout;
+
     public LogWorkoutActivityFragment() {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.workout = new Workout(new Date().toString(), null, new Date());
+        Log.d(LOG_TAG, "fragment's workout is: " + this.workout);
+
+        //TODO: Save the workout to the database
     }
 
     @Override
@@ -28,6 +47,8 @@ public class LogWorkoutActivityFragment extends Fragment {
                 showSelectExerciseDialog();
             }
         });
+        TextView workoutName = (TextView) view.findViewById(R.id.workout_name);
+        workoutName.setText(this.workout.getName());
         return view;
 
     }

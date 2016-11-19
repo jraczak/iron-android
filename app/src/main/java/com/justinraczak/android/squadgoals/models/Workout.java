@@ -28,6 +28,9 @@ public class Workout extends RealmObject {
         this.sets = sets;
     }
 
+    public Workout() {
+    }
+
     public Date getDate() {
         return date;
     }

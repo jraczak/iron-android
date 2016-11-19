@@ -16,6 +16,5 @@ public class Set extends RealmObject{
     private int id;
     @Required
     private Date date;
-    @Required
     private Workout workout;
 }

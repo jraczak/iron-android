@@ -23,16 +23,17 @@
         android:layout_height="wrap_content"></FrameLayout>
 
     <TextView
-        android:id="@+id/log_workout_intro"
+        android:id="@+id/workout_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Log your workout by adding exercises and saving sets."/>
+        android:text="Workout name"
+        android:textSize="24sp"/>
 
     <Button
         android:id="@+id/button_add_exercise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/log_workout_intro"
+        android:layout_below="@+id/workout_name"
         android:background="@color/accent"
         android:textColor="@android:color/white"
         android:text="Add execise"/>
