@@ -19,6 +19,16 @@
         android:layout_height="wrap_content"
         android:text="@string/signed_in_header"/>
 
+    <!--TODO: Remove these sandbox text fields -->
+    <TextView
+        android:id="@+id/datetime_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/time_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/button_sign_out"
         android:layout_width="wrap_content"

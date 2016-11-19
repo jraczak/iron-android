@@ -1,5 +1,7 @@
 package com.justinraczak.android.squadgoals.models;
 
+import java.util.Date;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -16,6 +18,6 @@ public class Workout extends RealmObject {
     @Required
     private String name;
     public RealmList<Set> sets;
-
+    private Date date;
 
 }

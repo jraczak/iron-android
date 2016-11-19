@@ -1,5 +1,7 @@
 package com.justinraczak.android.squadgoals.models;
 
+import java.util.Date;
+
 import io.realm.RealmObject;
 
 /**
@@ -7,4 +9,6 @@ import io.realm.RealmObject;
  */
 
 public class Set extends RealmObject{
+
+    private Date date;
 }

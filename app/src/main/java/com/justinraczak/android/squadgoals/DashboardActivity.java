@@ -1,6 +1,8 @@
 package com.justinraczak.android.squadgoals;
 
 import android.content.Intent;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,6 +22,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.justinraczak.android.squadgoals.models.Exercise;
+
+import java.util.Date;
 
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -71,6 +75,17 @@ public class DashboardActivity extends AppCompatActivity
 
         //TODO: Remove this data tester
         updateUserName();
+
+        //TODO: Remove this debugging datetime field
+        SimpleDateFormat timeFormat = new SimpleDateFormat("K:mm a");
+        TextView dateTimeTextView = (TextView) findViewById(R.id.datetime_textview);
+        TextView timeTextView = (TextView) findViewById(R.id.time_textview);
+        Date date = new Date();
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(date);
+        String currentTimeString = timeFormat.format(date);
+        dateTimeTextView.setText(currentDateTimeString);
+        timeTextView.setText(currentTimeString);
+
     }
 
     //@Override
