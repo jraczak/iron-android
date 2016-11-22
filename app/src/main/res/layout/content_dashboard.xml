@@ -36,4 +36,9 @@
         android:layout_marginTop="16dp"
         android:text="Sign out"/>
 
+    <ListView
+        android:id="@+id/dashboard_list_workouts_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
 </LinearLayout>
