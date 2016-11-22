@@ -48,7 +48,7 @@ ExerciseFragment.OnFragmentInteractionListener {
         Log.d("LogWorkoutActivity", String.valueOf(R.id.content_log_workout));
 
         fragmentTransaction.add(R.id.exercise_fragment_container, exerciseFragment, name + "_fragment");
-        fragmentTransaction.addToBackStack(null);
+        //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
     }

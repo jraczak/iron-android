@@ -39,6 +39,8 @@
     <ListView
         android:id="@+id/dashboard_list_workouts_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="16dp"></ListView>
 
 </LinearLayout>
