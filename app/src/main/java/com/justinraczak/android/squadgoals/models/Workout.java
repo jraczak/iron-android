@@ -35,6 +35,21 @@ public class Workout extends RealmObject {
         return date;
     }
 
+    public String getFriendlyDate() {
+        //TODO: Easy method to get full date as string
+        return null;
+    }
+
+    public String getFriendlyDateWithYear() {
+        //TODO: Easy method to get full date as string including year
+        return null;
+    }
+
+    public String getTime() {
+        //TODO: Easy method to get workout time as string
+        return null;
+    }
+
     public void setDate(Date date) {
         this.date = date;
     }

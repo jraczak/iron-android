@@ -15,13 +15,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.justinraczak.android.squadgoals.adapters.DashboardWorkoutAdapter;
 import com.justinraczak.android.squadgoals.models.Exercise;
+import com.justinraczak.android.squadgoals.models.Workout;
 
 import java.util.Date;
 
@@ -36,6 +42,9 @@ public class DashboardActivity extends AppCompatActivity
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+    private DashboardWorkoutAdapter mWorkoutAdapter;
+    private RealmResults<Workout> mWorkoutRealmResults;
+    public Realm mRealm = Realm.getDefaultInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +53,14 @@ public class DashboardActivity extends AppCompatActivity
 
         onCreateDrawer();
 
-        Realm realm = Realm.getDefaultInstance();
 
-        RealmQuery<Exercise> query = realm.where(Exercise.class);
+        RealmQuery<Exercise> query = mRealm.where(Exercise.class);
         RealmResults<Exercise> result = query.findAll();
         Log.d(TAG, "There are " + result.size() + " exercises ready for use.");
+
+        RealmQuery<Workout> workoutRealmQuery = mRealm.where(Workout.class);
+        mWorkoutRealmResults = workoutRealmQuery.findAll();
+        Log.d(TAG, "There were " + mWorkoutRealmResults.size() + " workouts found.");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +98,21 @@ public class DashboardActivity extends AppCompatActivity
         dateTimeTextView.setText(currentDateTimeString);
         timeTextView.setText(currentTimeString);
 
+        //TODO: Grab the workout listview and set the adapater on it
+        mWorkoutAdapter = new DashboardWorkoutAdapter(this, mWorkoutRealmResults.size(),
+                mWorkoutRealmResults);
+        ListView workoutListView = (ListView) findViewById(R.id.dashboard_list_workouts_listview);
+        workoutListView.setAdapter(mWorkoutAdapter);
+        setListViewHeightBasedOnItems(workoutListView);
+
+        workoutListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(), "You tapped the " +
+                        mWorkoutRealmResults.get(position).getName() +
+                        " workout.", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     //@Override
@@ -145,6 +172,14 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     @Override
+    public void onRestart() {
+        Log.d(TAG, "calling through to base onResume");
+        super.onResume();
+        Log.d(TAG, "trying to update listview with new workout query");
+        updateWorkoutList();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dashboard, menu);
@@ -193,5 +228,45 @@ public class DashboardActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public static boolean setListViewHeightBasedOnItems(ListView listView) {
+
+        ListAdapter listAdapter = listView.getAdapter();
+
+        if (listAdapter != null) {
+            int numberOfItems = listAdapter.getCount();
+            int totalItemsHeight = 0;
+
+            for (int itemPosition = 0; itemPosition < numberOfItems; itemPosition++) {
+                View item = listAdapter.getView(itemPosition, null, listView);
+                item.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+                totalItemsHeight += item.getMeasuredHeight();
+            }
+
+            int totalDividersHeight = listView.getDividerHeight() * (numberOfItems -1 );
+
+            ViewGroup.LayoutParams params =
+                    listView.getLayoutParams();
+            params.height = totalItemsHeight + totalDividersHeight;
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void updateWorkoutList() {
+        RealmQuery<Workout> workoutRealmQuery = mRealm.where(Workout.class);
+        mWorkoutRealmResults = workoutRealmQuery.findAll();
+        Log.d(TAG, "There were " + mWorkoutRealmResults.size() + " workouts found during activity restart.");
+
+        mWorkoutAdapter = new DashboardWorkoutAdapter(this, mWorkoutRealmResults.size(), mWorkoutRealmResults);
+        ListView listView = (ListView) findViewById(R.id.dashboard_list_workouts_listview);
+        listView.setAdapter(mWorkoutAdapter);
+        setListViewHeightBasedOnItems(listView);
     }
 }

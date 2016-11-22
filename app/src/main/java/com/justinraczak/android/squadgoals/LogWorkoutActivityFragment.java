@@ -14,6 +14,8 @@ import com.justinraczak.android.squadgoals.models.Workout;
 
 import java.util.Date;
 
+import io.realm.Realm;
+
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -22,6 +24,7 @@ public class LogWorkoutActivityFragment extends Fragment {
     private final static String LOG_TAG = LogWorkoutActivityFragment.class.getSimpleName();
 
     private Workout workout;
+    private Realm mRealm;
 
     public LogWorkoutActivityFragment() {
     }
@@ -29,10 +32,16 @@ public class LogWorkoutActivityFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.workout = new Workout(new Date().toString(), null, new Date());
+        mRealm = Realm.getDefaultInstance();
+        workout = new Workout(new Date().toString(), null, new Date());
+        // TODO see if this is needed: // this.workout = workout;
         Log.d(LOG_TAG, "fragment's workout is: " + this.workout);
 
         //TODO: Save the workout to the database
+        mRealm.beginTransaction();
+        Workout realmWorkout = mRealm.copyToRealm(workout);
+        mRealm.commitTransaction();
+        Log.d(LOG_TAG, "Saved workout " + workout.getName() + " to realm.");
     }
 
     @Override
