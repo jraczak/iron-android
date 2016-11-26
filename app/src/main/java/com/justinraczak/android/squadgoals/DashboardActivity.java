@@ -251,6 +251,7 @@ public class DashboardActivity extends AppCompatActivity
             params.height = totalItemsHeight + totalDividersHeight;
             listView.setLayoutParams(params);
             listView.requestLayout();
+            listView.setFocusable(false);
 
             return true;
         }
