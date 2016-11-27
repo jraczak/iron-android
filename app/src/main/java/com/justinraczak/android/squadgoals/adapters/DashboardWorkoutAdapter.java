@@ -7,11 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.justinraczak.android.squadgoals.DashboardActivity;
 import com.justinraczak.android.squadgoals.R;
 import com.justinraczak.android.squadgoals.models.Workout;
 
+import io.realm.Realm;
 import io.realm.RealmResults;
 
 /**
@@ -21,6 +25,7 @@ import io.realm.RealmResults;
 public class DashboardWorkoutAdapter extends BaseAdapter {
 
     private final String LOG_TAG = DashboardWorkoutAdapter.class.getSimpleName();
+    private Realm mRealm;
 
     private Context mContext;
     public int numberOfWorkouts;
@@ -32,6 +37,7 @@ public class DashboardWorkoutAdapter extends BaseAdapter {
         numberOfWorkouts = count;
         mWorkoutsList = workouts;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mRealm = Realm.getDefaultInstance();
     }
 
     @Override
@@ -53,8 +59,9 @@ public class DashboardWorkoutAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         CardView cardView;
         TextView workoutNameTextView;
+        Button deleteWorkoutButton;
 
-        Workout workout = (Workout) this.getItem(position);
+        final Workout workout = (Workout) this.getItem(position);
 
         Log.d(LOG_TAG, "convertView is " + convertView);
         Log.d(LOG_TAG, "parent is " + parent);
@@ -70,8 +77,21 @@ public class DashboardWorkoutAdapter extends BaseAdapter {
 
         workoutNameTextView = (TextView) cardView.findViewById(R.id.workout_card_workout_name);
         workoutNameTextView.setText(workout.getName());
+        deleteWorkoutButton = (Button) cardView.findViewById(R.id.button_delete_workout);
+        deleteWorkoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(LOG_TAG, "Attempting to delete workout " + workout.getName());
+                Toast.makeText(v.getContext(), "Deleting workout " + workout.getName(), Toast.LENGTH_LONG).show();
+                mRealm.beginTransaction();
+                workout.deleteFromRealm();
+                mRealm.commitTransaction();
+                ((DashboardActivity)mContext).updateWorkoutList();
+            }
+        });
 
-        Log.d(LOG_TAG, "tried to make ard for " + workout.getName());
+
+        Log.d(LOG_TAG, "tried to make card for " + workout.getName());
 
         return cardView;
     }

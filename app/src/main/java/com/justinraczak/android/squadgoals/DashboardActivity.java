@@ -34,6 +34,7 @@ import java.util.Date;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 public class DashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -59,7 +60,7 @@ public class DashboardActivity extends AppCompatActivity
         Log.d(TAG, "There are " + result.size() + " exercises ready for use.");
 
         RealmQuery<Workout> workoutRealmQuery = mRealm.where(Workout.class);
-        mWorkoutRealmResults = workoutRealmQuery.findAll();
+        mWorkoutRealmResults = workoutRealmQuery.findAll().sort("date", Sort.DESCENDING);
         Log.d(TAG, "There were " + mWorkoutRealmResults.size() + " workouts found.");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -269,7 +270,7 @@ public class DashboardActivity extends AppCompatActivity
 
     public void updateWorkoutList() {
         RealmQuery<Workout> workoutRealmQuery = mRealm.where(Workout.class);
-        mWorkoutRealmResults = workoutRealmQuery.findAll();
+        mWorkoutRealmResults = workoutRealmQuery.findAll().sort("date", Sort.DESCENDING);
         Log.d(TAG, "There were " + mWorkoutRealmResults.size() + " workouts found during activity restart.");
 
         mWorkoutAdapter = new DashboardWorkoutAdapter(this, mWorkoutRealmResults.size(), mWorkoutRealmResults);
