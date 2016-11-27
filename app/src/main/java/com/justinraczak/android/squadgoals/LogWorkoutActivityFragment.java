@@ -15,6 +15,7 @@ import com.justinraczak.android.squadgoals.models.Workout;
 import java.util.Date;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -33,15 +34,22 @@ public class LogWorkoutActivityFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mRealm = Realm.getDefaultInstance();
-        workout = new Workout(new Date().toString(), null, new Date());
-        // TODO see if this is needed: // this.workout = workout;
-        Log.d(LOG_TAG, "fragment's workout is: " + this.workout);
 
-        //TODO: Save the workout to the database
-        mRealm.beginTransaction();
-        Workout realmWorkout = mRealm.copyToRealm(workout);
-        mRealm.commitTransaction();
-        Log.d(LOG_TAG, "Saved workout " + workout.getName() + " to realm.");
+        //TODO: Check if there is a workout passed in before creating a new one
+        if (getActivity().getIntent().getStringExtra("workoutId") == null) {
+            workout = new Workout(new Date().toString(), null, new Date());
+            Log.d(LOG_TAG, "fragment's workout is: " + this.workout);
+            mRealm.beginTransaction();
+            Workout realmWorkout = mRealm.copyToRealm(workout);
+            mRealm.commitTransaction();
+            Log.d(LOG_TAG, "Created and saved workout " + workout.getName() + " to realm.");
+        } else {
+            RealmResults<Workout> workoutRealmResults = mRealm.where(Workout.class)
+                    .equalTo("id", getActivity().getIntent().getStringExtra("workoutId"))
+                    .findAll();
+            Log.d(LOG_TAG, workoutRealmResults.size() + " workouts found by searching ID");
+            workout = workoutRealmResults.first();
+        }
     }
 
     @Override

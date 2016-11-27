@@ -98,16 +98,23 @@ public class DashboardActivity extends AppCompatActivity
         dateTimeTextView.setText(currentDateTimeString);
         timeTextView.setText(currentTimeString);
 
-        //TODO: Grab the workout listview and set the adapater on it
+        //TODO: Grab the workout listview and set the adapter on it
         mWorkoutAdapter = new DashboardWorkoutAdapter(this, mWorkoutRealmResults.size(),
                 mWorkoutRealmResults);
-        ListView workoutListView = (ListView) findViewById(R.id.dashboard_list_workouts_listview);
+        final ListView workoutListView = (ListView) findViewById(R.id.dashboard_list_workouts_listview);
         workoutListView.setAdapter(mWorkoutAdapter);
         setListViewHeightBasedOnItems(workoutListView);
 
         workoutListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //TODO: Change this to load the selected workout in log mode
+                Intent intent = new Intent(getApplicationContext(), LogWorkoutActivity.class);
+                intent.putExtra("workoutId", mWorkoutRealmResults.get(position).getId());
+                Log.d(TAG, "Putting workout " + mWorkoutRealmResults.get(position).getId() +
+                " into intent.");
+                startActivity(intent);
+                //TODO: Remove the toast once workout is successfully passed to log activity
                 Toast.makeText(getApplicationContext(), "You tapped the " +
                         mWorkoutRealmResults.get(position).getName() +
                         " workout.", Toast.LENGTH_LONG).show();
