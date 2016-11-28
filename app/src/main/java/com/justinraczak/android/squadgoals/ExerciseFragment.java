@@ -2,7 +2,6 @@ package com.justinraczak.android.squadgoals;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -11,6 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.justinraczak.android.squadgoals.models.Exercise;
+import com.justinraczak.android.squadgoals.models.Workout;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 
 /**
@@ -31,6 +36,8 @@ public class ExerciseFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String exerciseName;
     private int setCount;
+    private Exercise mExercise;
+    private Realm mRealm;
 
     private OnFragmentInteractionListener mListener;
 
@@ -59,10 +66,15 @@ public class ExerciseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mRealm = Realm.getDefaultInstance();
         if (getArguments() != null) {
             exerciseName = getArguments().getString(ARG_PARAM1);
             setCount = getArguments().getInt(ARG_PARAM2);
         }
+        RealmResults<Exercise> exerciseRealmResults = mRealm.where(Exercise.class)
+                .equalTo("name", exerciseName)
+                .findAll();
+        mExercise = exerciseRealmResults.first();
     }
 
     @Override
@@ -90,14 +102,21 @@ public class ExerciseFragment extends Fragment {
         //view.setCardBackgroundColor(getResources().getColor(R.color.primary_light));
         //view.setRadius(2);
         Log.d(LOG_TAG, "card elevation is set to " + view.getCardElevation());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: Load an edit sets fragment with the selected exercise
+                onExerciseCardSelected(mExercise, ((LogWorkoutActivity)getActivity()).getWorkout());
+            }
+        });
 
         return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onExerciseCardSelected(Exercise exercise, Workout workout) {
         if (mListener != null) {
-            mListener.onExerciseCardSelected(uri);
+            mListener.onExerciseCardSelected(exercise, workout);
         }
     }
 
@@ -131,6 +150,6 @@ public class ExerciseFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onExerciseCardSelected(Uri uri);
+        void onExerciseCardSelected(Exercise exercise, Workout workout);
     }
 }

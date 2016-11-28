@@ -26,14 +26,14 @@
             android:id="@+id/exercise_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="@color/primary_text"
             android:text="@string/hello_blank_fragment" />
         <TextView
             android:id="@+id/set_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/primary_text"
             android:text="@string/hello_blank_fragment" />
     </LinearLayout>

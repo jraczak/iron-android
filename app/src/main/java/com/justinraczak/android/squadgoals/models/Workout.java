@@ -1,5 +1,8 @@
 package com.justinraczak.android.squadgoals.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,7 +15,7 @@ import io.realm.annotations.Required;
  * Created by Justin on 11/18/16.
  */
 
-public class Workout extends RealmObject {
+public class Workout extends RealmObject implements Parcelable {
 
     @PrimaryKey
     private String id;
@@ -30,6 +33,36 @@ public class Workout extends RealmObject {
 
     public Workout() {
     }
+
+    // PARCELABLE REQUIREMENTS
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        //TODO: Figure out if it matters that I don't pass all fields into writer
+    }
+
+    public static final Parcelable.Creator<Workout> CREATOR = new Parcelable.Creator<Workout>() {
+        @Override
+        public Workout createFromParcel(Parcel source) {
+            //TODO: Figure out if I actually need to implement this
+            return null;
+        }
+
+        @Override
+        public Workout[] newArray(int size) {
+            return new Workout[size];
+        }
+    };
+
+
+    // END PARCELABLE REQUIREMENTS
 
     public Date getDate() {
         return date;
