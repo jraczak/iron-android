@@ -19,10 +19,12 @@ import io.realm.RealmResults;
 
 public class LogWorkoutActivity extends DashboardActivity
 implements SelectExerciseFragment.OnExerciseSelectedListener,
-ExerciseFragment.OnFragmentInteractionListener {
+ExerciseFragment.OnFragmentInteractionListener,
+EditSetsFragment.OnFragmentInteractionListener {
 
     private static final String LOG_TAG = LogWorkoutActivity.class.getSimpleName();
     public Workout mWorkout;
+    private Realm mRealm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,12 @@ ExerciseFragment.OnFragmentInteractionListener {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Add the content fragment
+        LogWorkoutActivityFragment logWorkoutActivityFragment = new LogWorkoutActivityFragment();
+        getFragmentManager().beginTransaction()
+                .add(R.id.fragment_container_log_workout, logWorkoutActivityFragment, "LOG_WORKOUT_ACTIVITY_FRAGMENT")
+                .commit();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +77,8 @@ ExerciseFragment.OnFragmentInteractionListener {
 
     public void onExerciseSelected(int position, String name) {
         Toast.makeText(this, "Added " + name + " to workout", Toast.LENGTH_SHORT).show();
+
+
         getFragmentManager().beginTransaction()
                 .remove(getFragmentManager().findFragmentByTag("SELECT_EXERCISE_FRAGMENT"))
                 .commit();
@@ -86,7 +96,16 @@ ExerciseFragment.OnFragmentInteractionListener {
     public void onExerciseCardSelected(Exercise exercise, Workout workout) {
         //TODO: Figure out what actually needs to be done here to navigate to logger
         EditSetsFragment editSetsFragment = EditSetsFragment.newInstance(workout, exercise);
+        getFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container_log_workout, editSetsFragment)
+                .addToBackStack("add_edit_sets_fragment")
+                .commit();
+        //TODO: Figure out why new fragment lays over top of old one
         return;
+    }
+
+    public void onSetsSaved() {
+        Log.d(LOG_TAG, "onSetsSaved called");
     }
 
     public Workout getWorkout() {

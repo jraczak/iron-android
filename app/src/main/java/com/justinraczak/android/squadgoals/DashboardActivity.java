@@ -104,8 +104,9 @@ public class DashboardActivity extends AppCompatActivity
                 mWorkoutRealmResults);
         final ListView workoutListView = (ListView) findViewById(R.id.dashboard_list_workouts_listview);
         workoutListView.setAdapter(mWorkoutAdapter);
-        setListViewHeightBasedOnItems(workoutListView);
 
+
+        Log.d(TAG, "About to set click listener on workout card listview");
         workoutListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -121,6 +122,8 @@ public class DashboardActivity extends AppCompatActivity
                         " workout.", Toast.LENGTH_LONG).show();
             }
         });
+
+        setListViewHeightBasedOnItems(workoutListView);
     }
 
     //@Override

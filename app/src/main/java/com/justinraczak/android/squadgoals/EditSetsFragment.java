@@ -40,8 +40,8 @@ public class EditSetsFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param workout The workout for which sets are being edited.
+     * @param exercise The exercise of which sets are being created.
      * @return A new instance of fragment EditSetsFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -74,7 +74,7 @@ public class EditSetsFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onSetsSaved();
         }
     }
 
@@ -107,6 +107,6 @@ public class EditSetsFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onSetsSaved();
     }
 }
