@@ -1,12 +1,14 @@
 package com.justinraczak.android.squadgoals;
 
 import android.app.FragmentTransaction;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.justinraczak.android.squadgoals.models.Exercise;
@@ -20,7 +22,8 @@ import io.realm.RealmResults;
 public class LogWorkoutActivity extends DashboardActivity
 implements SelectExerciseFragment.OnExerciseSelectedListener,
 ExerciseFragment.OnFragmentInteractionListener,
-EditSetsFragment.OnFragmentInteractionListener {
+EditSetsFragment.OnFragmentInteractionListener,
+SetFragment.OnFragmentInteractionListener {
 
     private static final String LOG_TAG = LogWorkoutActivity.class.getSimpleName();
     public Workout mWorkout;
@@ -96,16 +99,32 @@ EditSetsFragment.OnFragmentInteractionListener {
     public void onExerciseCardSelected(Exercise exercise, Workout workout) {
         //TODO: Figure out what actually needs to be done here to navigate to logger
         EditSetsFragment editSetsFragment = EditSetsFragment.newInstance(workout, exercise);
+        //Replace the fragment now that it is added programmatically instead of via xml, which doesn't work
         getFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container_log_workout, editSetsFragment)
                 .addToBackStack("add_edit_sets_fragment")
                 .commit();
-        //TODO: Figure out why new fragment lays over top of old one
         return;
     }
 
-    public void onSetsSaved() {
+    public void onSetsSaved(Exercise exercise, Workout workout, int reps, int weight) {
         Log.d(LOG_TAG, "onSetsSaved called");
+        SetFragment setFragment = SetFragment.newInstance(exercise, workout, reps, weight);
+        Log.d(LOG_TAG, "Adding fragment to container");
+        getFragmentManager().beginTransaction()
+                .add(R.id.container_saved_sets, setFragment, null)
+                .commit();
+        Log.d(LOG_TAG, "Clearing text field values");
+        //TODO: See if these should be variables in the class so they're not always looked up
+        EditText repsEditText = (EditText) findViewById(R.id.edit_text_reps);
+        EditText weightEditText = (EditText) findViewById(R.id.edit_text_weight);
+        repsEditText.setText("");
+        weightEditText.setText("");
+        //TODO: Also save this set to Realm
+    }
+
+    public void onSetSelected(Uri uri) {
+        Log.d(LOG_TAG, "onSetSelected callback initiated");
     }
 
     public Workout getWorkout() {

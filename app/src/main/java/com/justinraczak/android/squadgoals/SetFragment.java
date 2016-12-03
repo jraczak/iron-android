@@ -2,14 +2,13 @@ package com.justinraczak.android.squadgoals;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import com.justinraczak.android.squadgoals.models.Exercise;
 import com.justinraczak.android.squadgoals.models.Workout;
@@ -18,25 +17,26 @@ import com.justinraczak.android.squadgoals.models.Workout;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link EditSetsFragment.OnFragmentInteractionListener} interface
+ * {@link SetFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link EditSetsFragment#newInstance} factory method to
+ * Use the {@link SetFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EditSetsFragment extends Fragment {
+public class SetFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "exercise";
-    private static final String ARG_PARAM2 = "workout";
-    private static final String LOG_TAG = EditSetsFragment.class.getSimpleName();
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private Exercise mExercise;
     private Workout mWorkout;
+    private int mReps;
+    private int mWeight;
 
     private OnFragmentInteractionListener mListener;
 
-    public EditSetsFragment() {
+    public SetFragment() {
         // Required empty public constructor
     }
 
@@ -44,17 +44,20 @@ public class EditSetsFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param workout The workout for which sets are being edited.
-     * @param exercise The exercise of which sets are being created.
-     * @return A new instance of fragment EditSetsFragment.
+     * @param exercise The exercise performed during the set.
+     * @param workout The workout the set is to be saved to.
+     * @param reps The number of reps for the set.
+     * @param weight The weight for the set
+     * @return A new instance of fragment SetFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EditSetsFragment newInstance(Workout workout, Exercise exercise) {
-        EditSetsFragment fragment = new EditSetsFragment();
+    public static SetFragment newInstance(Exercise exercise, Workout workout, int reps, int weight) {
+        SetFragment fragment = new SetFragment();
         Bundle args = new Bundle();
-        //TODO: Figure out how to make these serializable
         args.putParcelable("exercise", exercise);
         args.putParcelable("workout", workout);
+        args.putInt("reps", reps);
+        args.putInt("weight", weight);
         fragment.setArguments(args);
         return fragment;
     }
@@ -65,6 +68,8 @@ public class EditSetsFragment extends Fragment {
         if (getArguments() != null) {
             mExercise = getArguments().getParcelable("exercise");
             mWorkout = getArguments().getParcelable("workout");
+            mReps = getArguments().getInt("reps");
+            mWeight = getArguments().getInt("weight");
         }
     }
 
@@ -72,37 +77,19 @@ public class EditSetsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_edit_sets, container, false);
-        Button saveButton = (Button) view.findViewById(R.id.button_save_set);
-        EditText repsEditText = (EditText) view.findViewById(R.id.edit_text_reps);
-        repsEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-        EditText weightEditText = (EditText) view.findViewById(R.id.edit_text_weight);
-        weightEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSaveButtonPressed(mExercise, mWorkout);
-            }
-        });
+        View view = inflater.inflate(R.layout.fragment_set, container, false);
+        TextView repTextView = (TextView) view.findViewById(R.id.rep_count);
+        TextView weightTextView = (TextView) view.findViewById(R.id.weight);
+        Log.d("SetFragment", "TextView is " + repTextView);
+        repTextView.setText(String.valueOf(this.mReps));
+        weightTextView.setText(String.valueOf(this.mWeight));
         return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onSaveButtonPressed(Exercise exercise, Workout workout) {
+    public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-
-            EditText repsEditText = (EditText) getView().findViewById(R.id.edit_text_reps);
-            Log.d(LOG_TAG, "Fetching int value of reps");
-            int reps = Integer.parseInt(String.valueOf(repsEditText.getText()));
-            Log.d(LOG_TAG, "Reps value is " + reps);
-
-            EditText weightEditText = (EditText) getView().findViewById(R.id.edit_text_weight);
-            Log.d(LOG_TAG, "Fetching int value of weight");
-            int weight = Integer.parseInt(String.valueOf(weightEditText.getText()));
-            Log.d(LOG_TAG, "Weight value is " + weight);
-
-            Log.d(LOG_TAG, "Sending parsed input values to activity");
-            mListener.onSetsSaved(exercise, workout, reps, weight);
+            mListener.onSetSelected(uri);
         }
     }
 
@@ -135,6 +122,6 @@ public class EditSetsFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onSetsSaved(Exercise exercise, Workout workout, int reps, int weight);
+        void onSetSelected(Uri uri);
     }
 }
