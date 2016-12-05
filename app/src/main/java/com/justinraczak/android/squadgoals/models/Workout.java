@@ -9,6 +9,7 @@ import java.util.UUID;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
@@ -31,6 +32,7 @@ public class Workout extends RealmObject implements Parcelable {
         this.name = name;
         this.date = date;
         this.sets = sets;
+        this.exercises = new RealmList<>();
     }
 
     public Workout() {
@@ -132,5 +134,15 @@ public class Workout extends RealmObject implements Parcelable {
         realm.beginTransaction();
         this.exercises.add(exercise);
         realm.commitTransaction();
+    }
+
+    public int getSetsForExercise(Exercise exercise) {
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<Set> results;
+
+        results = realm.where(Set.class).equalTo("workout.id", this.getId())
+                .equalTo("exercise.id", exercise.getId())
+                .findAll();
+        return results.size();
     }
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.justinraczak.android.squadgoals.models.Exercise;
 import com.justinraczak.android.squadgoals.models.Workout;
 
 import io.realm.Realm;
@@ -65,6 +66,16 @@ public class LogWorkoutActivityFragment extends Fragment {
         TextView workoutName = (TextView) view.findViewById(R.id.workout_name);
         //TODO: Figure out why workout is not available at activity start time
         workoutName.setText(mWorkout.getName());
+
+        FragmentManager fragmentManager = getFragmentManager();
+        for (Exercise exercise : mWorkout.exercises) {
+            //TODO: Figure out how to actually count the sets for this exercise from the workout
+            ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(exercise, mWorkout.getSetsForExercise(exercise));
+            fragmentManager.beginTransaction()
+                    .add(R.id.exercise_fragment_container, exerciseFragment)
+                    .commit();
+        }
+
         return view;
 
     }

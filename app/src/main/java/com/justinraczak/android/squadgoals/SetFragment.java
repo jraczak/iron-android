@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.justinraczak.android.squadgoals.models.Exercise;
+import com.justinraczak.android.squadgoals.models.Set;
 import com.justinraczak.android.squadgoals.models.Workout;
 
 
@@ -31,6 +32,7 @@ public class SetFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private Exercise mExercise;
     private Workout mWorkout;
+    private Set mSet;
     private int mReps;
     private int mWeight;
 
@@ -51,11 +53,12 @@ public class SetFragment extends Fragment {
      * @return A new instance of fragment SetFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SetFragment newInstance(Exercise exercise, Workout workout, int reps, int weight) {
+    public static SetFragment newInstance(Exercise exercise, Workout workout, Set set, int reps, int weight) {
         SetFragment fragment = new SetFragment();
         Bundle args = new Bundle();
         args.putParcelable("exercise", exercise);
         args.putParcelable("workout", workout);
+        args.putParcelable("set", set);
         args.putInt("reps", reps);
         args.putInt("weight", weight);
         fragment.setArguments(args);

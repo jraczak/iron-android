@@ -89,7 +89,7 @@ SetFragment.OnFragmentInteractionListener {
                 .remove(getFragmentManager().findFragmentByTag("SELECT_EXERCISE_FRAGMENT"))
                 .commit();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(exercise, 0);
+        ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(exercise, mWorkout.getSetsForExercise(exercise));
         Log.d("LogWorkoutActivity", String.valueOf(R.id.content_log_workout));
 
         fragmentTransaction.add(R.id.exercise_fragment_container, exerciseFragment, name + "_fragment");
@@ -102,7 +102,6 @@ SetFragment.OnFragmentInteractionListener {
 
 
     public void onExerciseCardSelected(Exercise exercise, Workout workout) {
-        //TODO: Figure out what actually needs to be done here to navigate to logger
         EditSetsFragment editSetsFragment = EditSetsFragment.newInstance(workout, exercise);
         //Replace the fragment now that it is added programmatically instead of via xml, which doesn't work
         getFragmentManager().beginTransaction()
@@ -114,7 +113,11 @@ SetFragment.OnFragmentInteractionListener {
 
     public void onSetsSaved(Exercise exercise, Workout workout, int reps, int weight) {
         Log.d(LOG_TAG, "onSetsSaved called");
-        SetFragment setFragment = SetFragment.newInstance(exercise, workout, reps, weight);
+
+        Set set = new Set(new Date(), workout, exercise, reps, weight);
+
+
+        SetFragment setFragment = SetFragment.newInstance(exercise, workout, set, reps, weight);
         Log.d(LOG_TAG, "Adding fragment to container");
         getFragmentManager().beginTransaction()
                 .add(R.id.container_saved_sets, setFragment, null)
@@ -123,15 +126,17 @@ SetFragment.OnFragmentInteractionListener {
         //TODO: See if these should be variables in the class so they're not always looked up
         EditText repsEditText = (EditText) findViewById(R.id.edit_text_reps);
         EditText weightEditText = (EditText) findViewById(R.id.edit_text_weight);
-        repsEditText.getText().clear();
-        weightEditText.getText().clear();
+        //repsEditText.getText().clear();
+        //weightEditText.getText().clear();
         weightEditText.requestFocus();
-        //TODO: Also create the set and save this set to Realm
-        Set set = new Set()
+
+
+
     }
 
     public void onSetSelected(Uri uri) {
         Log.d(LOG_TAG, "onSetSelected callback initiated");
+        //TODO: Change the logger to edit mode on this action
     }
 
     public Workout getWorkout() {
