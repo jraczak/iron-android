@@ -15,7 +15,6 @@ import com.justinraczak.android.squadgoals.models.Exercise;
 import com.justinraczak.android.squadgoals.models.Workout;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 
 /**
@@ -29,7 +28,7 @@ import io.realm.RealmResults;
 public class ExerciseFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "exerciseName";
+    private static final String ARG_PARAM1 = "exercise";
     private static final String ARG_PARAM2 = "setCount";
     private static final String LOG_TAG = ExerciseFragment.class.getSimpleName();
 
@@ -49,15 +48,15 @@ public class ExerciseFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param exerciseName The name of the exercise being logged to the workout.
+     * @param exercise The exercise object being logged to the workout.
      * @param setCount The number of sets logged to the exercise.
      * @return A new instance of fragment ExerciseFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ExerciseFragment newInstance(String exerciseName, int setCount) {
+    public static ExerciseFragment newInstance(Exercise exercise, int setCount) {
         ExerciseFragment fragment = new ExerciseFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, exerciseName);
+        args.putParcelable(ARG_PARAM1, exercise);
         args.putInt(ARG_PARAM2, setCount);
         fragment.setArguments(args);
         return fragment;
@@ -66,15 +65,15 @@ public class ExerciseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mRealm = Realm.getDefaultInstance();
+        //mRealm = Realm.getDefaultInstance();
         if (getArguments() != null) {
-            exerciseName = getArguments().getString(ARG_PARAM1);
+            mExercise = getArguments().getParcelable(ARG_PARAM1);
             setCount = getArguments().getInt(ARG_PARAM2);
         }
-        RealmResults<Exercise> exerciseRealmResults = mRealm.where(Exercise.class)
-                .equalTo("name", exerciseName)
-                .findAll();
-        mExercise = exerciseRealmResults.first();
+        //RealmResults<Exercise> exerciseRealmResults = mRealm.where(Exercise.class)
+        //        .equalTo("name", exerciseName)
+        //        .findAll();
+        //mExercise = exerciseRealmResults.first();
     }
 
     @Override
@@ -85,7 +84,7 @@ public class ExerciseFragment extends Fragment {
         CardView view = (CardView) inflater.inflate(R.layout.fragment_exercise, container, false);
         TextView textView = (TextView) view.findViewById(R.id.exercise_name);
         TextView setCountTextView = (TextView) view.findViewById(R.id.set_count);
-        textView.setText(this.exerciseName);
+        textView.setText(this.mExercise.getName());
         setCountTextView.setText(this.setCount + " " + getResources().getString(R.string.sets_label));
 
         Log.d(LOG_TAG, "setting layout params of card");

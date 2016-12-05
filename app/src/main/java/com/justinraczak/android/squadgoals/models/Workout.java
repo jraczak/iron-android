@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import java.util.Date;
 import java.util.UUID;
 
+import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -22,6 +23,7 @@ public class Workout extends RealmObject implements Parcelable {
     @Required
     private String name;
     public RealmList<Set> sets;
+    public RealmList<Exercise> exercises;
     private Date date;
 
     public Workout(String name, RealmList<Set> sets, Date date) {
@@ -112,6 +114,23 @@ public class Workout extends RealmObject implements Parcelable {
     }
 
     public void addSet(Set set) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
         this.sets.add(set);
+        realm.commitTransaction();
+    }
+
+    public RealmList<Exercise> getExercises() {
+        return exercises;
+    }
+
+    //TODO: Create a bulk add feature
+    //public void RealmList<Exercise> addExercises(RealmList<Exercise> exercises)
+
+    public void addExercise(Exercise exercise) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        this.exercises.add(exercise);
+        realm.commitTransaction();
     }
 }

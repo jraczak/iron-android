@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.justinraczak.android.squadgoals.models.Exercise;
+import com.justinraczak.android.squadgoals.models.Set;
 import com.justinraczak.android.squadgoals.models.Workout;
 
 import java.util.Date;
@@ -81,18 +82,22 @@ SetFragment.OnFragmentInteractionListener {
     public void onExerciseSelected(int position, String name) {
         Toast.makeText(this, "Added " + name + " to workout", Toast.LENGTH_SHORT).show();
 
+        mRealm = Realm.getDefaultInstance();
+        Exercise exercise = mRealm.where(Exercise.class).equalTo("name", name).findAll().first();
 
         getFragmentManager().beginTransaction()
                 .remove(getFragmentManager().findFragmentByTag("SELECT_EXERCISE_FRAGMENT"))
                 .commit();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(name, 0);
+        ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(exercise, 0);
         Log.d("LogWorkoutActivity", String.valueOf(R.id.content_log_workout));
 
         fragmentTransaction.add(R.id.exercise_fragment_container, exerciseFragment, name + "_fragment");
         //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
+        //Add the exercise to the workout
+        mWorkout.addExercise(exercise);
     }
 
 
@@ -118,9 +123,11 @@ SetFragment.OnFragmentInteractionListener {
         //TODO: See if these should be variables in the class so they're not always looked up
         EditText repsEditText = (EditText) findViewById(R.id.edit_text_reps);
         EditText weightEditText = (EditText) findViewById(R.id.edit_text_weight);
-        repsEditText.setText("");
-        weightEditText.setText("");
-        //TODO: Also save this set to Realm
+        repsEditText.getText().clear();
+        weightEditText.getText().clear();
+        weightEditText.requestFocus();
+        //TODO: Also create the set and save this set to Realm
+        Set set = new Set()
     }
 
     public void onSetSelected(Uri uri) {
