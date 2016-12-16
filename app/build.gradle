@@ -9,6 +9,7 @@ android {
         applicationId "com.justinraczak.android.squadgoals"
         minSdkVersion 24
         targetSdkVersion 24
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
