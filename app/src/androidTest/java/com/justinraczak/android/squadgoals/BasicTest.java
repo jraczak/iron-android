@@ -28,6 +28,8 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -77,6 +79,32 @@ public class BasicTest {
                         isDisplayed()));
         button.check(matches(isDisplayed()));
 
+    }
+
+    @Test
+    public void sampleEmailLoginTest() {
+        reportHelper.label("Given I accept contacts permissions");
+        allowPermissionsIfNeeded();
+
+        reportHelper.label("When I type in my email and password");
+        onView(withId(R.id.email))
+                .perform(typeText("jraczak@gmail.com"));
+        onView(withId(R.id.password))
+                .perform(typeText("password"));
+
+        reportHelper.label("And I click the sign in with email button");
+        onView(withId(R.id.email_sign_in_button))
+                .perform(click());
+
+        reportHelper.label("Then I should see the sign out button on the dashboard");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            Log.d("Login test", "thread was interrupted");
+        }
+        //onView(withId(R.id.button_sign_out))
+        onView(withId(R.id.fab_new_workout))
+                .check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(

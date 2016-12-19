@@ -63,7 +63,7 @@ public class DashboardActivity extends AppCompatActivity
         mWorkoutRealmResults = workoutRealmQuery.findAll().sort("date", Sort.DESCENDING);
         Log.d(TAG, "There were " + mWorkoutRealmResults.size() + " workouts found.");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_new_workout);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
