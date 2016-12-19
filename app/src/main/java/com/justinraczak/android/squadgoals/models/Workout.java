@@ -136,7 +136,7 @@ public class Workout extends RealmObject implements Parcelable {
         realm.commitTransaction();
     }
 
-    public int getSetsForExercise(Exercise exercise) {
+    public int getSetCountForExercise(Exercise exercise) {
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Set> results;
 
@@ -144,5 +144,15 @@ public class Workout extends RealmObject implements Parcelable {
                 .equalTo("exercise.id", exercise.getId())
                 .findAll();
         return results.size();
+    }
+
+    public RealmResults<Set> getSetsForExercise(Exercise exercise) {
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<Set> results;
+
+        results = realm.where(Set.class).equalTo("workout.id", this.getId())
+                .equalTo("exercise.id", exercise.getId())
+                .findAll();
+        return results;
     }
 }

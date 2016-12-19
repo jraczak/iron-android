@@ -122,6 +122,12 @@ SetFragment.OnFragmentInteractionListener {
         getFragmentManager().beginTransaction()
                 .add(R.id.container_saved_sets, setFragment, null)
                 .commit();
+
+        //TODO: Save the set to the database
+        mRealm.beginTransaction();
+        mRealm.copyToRealm(set);
+        mRealm.commitTransaction();
+
         Log.d(LOG_TAG, "Clearing text field values");
         //TODO: See if these should be variables in the class so they're not always looked up
         EditText repsEditText = (EditText) findViewById(R.id.edit_text_reps);

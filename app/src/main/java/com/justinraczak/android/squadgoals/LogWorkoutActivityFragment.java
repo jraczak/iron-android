@@ -70,7 +70,7 @@ public class LogWorkoutActivityFragment extends Fragment {
         FragmentManager fragmentManager = getFragmentManager();
         for (Exercise exercise : mWorkout.exercises) {
             //TODO: Figure out how to actually count the sets for this exercise from the workout
-            ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(exercise, mWorkout.getSetsForExercise(exercise));
+            ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(exercise, mWorkout.getSetCountForExercise(exercise));
             fragmentManager.beginTransaction()
                     .add(R.id.exercise_fragment_container, exerciseFragment)
                     .commit();

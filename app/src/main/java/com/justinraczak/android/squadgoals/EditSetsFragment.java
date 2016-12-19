@@ -84,6 +84,10 @@ public class EditSetsFragment extends Fragment {
                 onSaveButtonPressed(mExercise, mWorkout);
             }
         });
+
+        //TODO: Make sure existing sets are loaded into the view
+
+
         return view;
     }
 
