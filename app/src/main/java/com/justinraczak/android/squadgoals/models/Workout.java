@@ -49,9 +49,10 @@ public class Workout extends RealmObject implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(realmId);
+        dest.writeInt(realmId);
         dest.writeString(name);
         //TODO: Figure out if it matters that I don't pass all fields into writer
+        //TODO: Fix parcelable, check if sets are actually related to workouts
     }
 
     public static final Parcelable.Creator<Workout> CREATOR = new Parcelable.Creator<Workout>() {
@@ -122,6 +123,7 @@ public class Workout extends RealmObject implements Parcelable {
         realm.beginTransaction();
         this.sets.add(set);
         realm.commitTransaction();
+        realm.close();
     }
 
     public RealmList<Exercise> getExercises() {
@@ -136,6 +138,7 @@ public class Workout extends RealmObject implements Parcelable {
         realm.beginTransaction();
         this.exercises.add(exercise);
         realm.commitTransaction();
+        realm.close();
     }
 
     public int getSetCountForExercise(Exercise exercise) {
@@ -145,6 +148,7 @@ public class Workout extends RealmObject implements Parcelable {
         results = realm.where(Set.class).equalTo("workout.realmId", this.getRealmId())
                 .equalTo("exercise.id", exercise.getId())
                 .findAll();
+        realm.close();
         return results.size();
     }
 
@@ -155,19 +159,23 @@ public class Workout extends RealmObject implements Parcelable {
         results = realm.where(Set.class).equalTo("workout.realmId", this.getRealmId())
                 .equalTo("exercise.id", exercise.getId())
                 .findAll();
+        realm.close();
         return results;
     }
 
-    private static Integer getNewAutoIncrementId() {
+    public static Integer getNewAutoIncrementId() {
         Realm realm = Realm.getDefaultInstance();
-        Integer oldMaxId = (Integer) realm.where(Workout.class).max("realmId");
-        Log.d(LOG_TAG, "old max id is " + oldMaxId);
-        if (oldMaxId == null) {
-            Log.d(LOG_TAG,"old max id was null");
+        //Integer oldMaxId = (Integer) realm.where(Workout.class).max("realmId").intValue();
+
+        //Log.d(LOG_TAG, "old max id is " + oldMaxId);
+        if (realm.where(Workout.class).max("realmId") == null) {
+            Log.d(LOG_TAG,"old max id was null, returning 1");
+            realm.close();
             return 1;
         } else {
-            Log.d(LOG_TAG, "old max id + 1 will be " + (oldMaxId+1));
-            return (oldMaxId+1);
+            Log.d(LOG_TAG, "incrementing max id");
+            realm.close();
+            return (realm.where(Workout.class).max("realmId").intValue()+1);
         }
     }
 }

@@ -40,17 +40,22 @@ SetFragment.OnFragmentInteractionListener {
 
         //TODO: Check if there is a workout passed in before creating a new one
         if (getIntent().getIntExtra("workoutId", 0) == 0) {
-            mWorkout = new Workout(new Date().toString(), null, new Date());
-            Log.d(LOG_TAG, "fragment's workout is: " + this.mWorkout);
+            //mWorkout = new Workout(new Date().toString(), null, new Date());
+            //Log.d(LOG_TAG, "fragment's workout is: " + this.mWorkout);
+            //Log.d(LOG_TAG, "workout realm id is " + mWorkout.getRealmId());
             mRealm.beginTransaction();
-            mRealm.copyToRealm(mWorkout);
+            //mRealm.copyToRealm(mWorkout);
+            mWorkout = mRealm.createObject(Workout.class, Workout.getNewAutoIncrementId());
+            mWorkout.setDate(new Date());
+            mWorkout.setSets(null);
+            mWorkout.setName(new Date().toString());
             mRealm.commitTransaction();
-            Log.d(LOG_TAG, "Created and saved workout " + mWorkout.getName() + " to realm.");
+            Log.d(LOG_TAG, "Created and saved workout " + mWorkout.getName() + " to realm with realm id " + mWorkout.getRealmId());
         } else {
             RealmResults<Workout> workoutRealmResults = mRealm.where(Workout.class)
                     .equalTo("realmId", getIntent().getIntExtra("workoutId", 0))
                     .findAll();
-            Log.d(LOG_TAG, workoutRealmResults.size() + " workouts found by searching ID");
+            Log.d(LOG_TAG, workoutRealmResults.size() + " workouts found by searching for realm id " + getIntent().getIntExtra("workoutId", 0));
             mWorkout = workoutRealmResults.first();
         }
 
@@ -77,6 +82,8 @@ SetFragment.OnFragmentInteractionListener {
         //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle("Log workout");
 
+        //TODO: Figure out how to deal with closing Realms
+
     }
 
     public void onExerciseSelected(int position, String name) {
@@ -98,6 +105,7 @@ SetFragment.OnFragmentInteractionListener {
 
         //Add the exercise to the workout
         mWorkout.addExercise(exercise);
+        mRealm.close();
     }
 
 
@@ -116,17 +124,23 @@ SetFragment.OnFragmentInteractionListener {
 
 
         //TODO: Save the set to the database
-        Integer id = Set.getNewAutoIncrementId();
-        Set set = new Set(id, new Date(), workout, exercise, reps, weight);
+
         mRealm.beginTransaction();
-        Set realmSet = mRealm.createObject(Set.class, set);
-        //set.setWorkout(workout);
-        //set.setExercise(exercise);
-        //set.setDate(new Date());
-        //set.setReps(reps);
-        //set.setWeight(weight);
+        //Integer id = Set.getNewAutoIncrementId();
+        //Set set = new Set(id, new Date(), workout, exercise, reps, weight);
+        //Log.d(LOG_TAG, "Attempting to save set with id " + set.getRealmId() + " to realm");
+        //Set realmSet = mRealm.copyToRealm(set);
+        Set set = mRealm.createObject(Set.class, Set.getNewAutoIncrementId());
+        set.setWorkout(workout);
+        set.setExercise(exercise);
+        set.setDate(new Date());
+        set.setReps(reps);
+        set.setWeight(weight);
         //set.setRealmId(Set.getNewAutoIncrementId());
         mRealm.commitTransaction();
+        Log.d(LOG_TAG, "id of managed realm set is " + set.getRealmId());
+        //Log.d(LOG_TAG, "id of managed realm object is " + realmSet.getRealmId());
+        mRealm.close();
 
         // Don't think I need this now: Long id = Set.getNewAutoIncrementId();
         //Set set = new Set(new Date(), workout, exercise, reps, weight);

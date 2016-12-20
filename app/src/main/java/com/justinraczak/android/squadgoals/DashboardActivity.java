@@ -45,7 +45,7 @@ public class DashboardActivity extends AppCompatActivity
     private ActionBarDrawerToggle mToggle;
     private DashboardWorkoutAdapter mWorkoutAdapter;
     private RealmResults<Workout> mWorkoutRealmResults;
-    public Realm mRealm = Realm.getDefaultInstance();
+    public Realm mRealm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,8 @@ public class DashboardActivity extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
 
         onCreateDrawer();
+
+        mRealm = Realm.getDefaultInstance();
 
 
         RealmQuery<Exercise> query = mRealm.where(Exercise.class);
@@ -125,6 +127,8 @@ public class DashboardActivity extends AppCompatActivity
         });
 
         setListViewHeightBasedOnItems(workoutListView);
+
+        mRealm.close();
     }
 
     //@Override
@@ -273,6 +277,7 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     public void updateWorkoutList() {
+        mRealm = Realm.getDefaultInstance();
         RealmQuery<Workout> workoutRealmQuery = mRealm.where(Workout.class);
         mWorkoutRealmResults = workoutRealmQuery.findAll().sort("date", Sort.DESCENDING);
         Log.d(TAG, "There were " + mWorkoutRealmResults.size() + " workouts found during activity restart.");
@@ -281,5 +286,6 @@ public class DashboardActivity extends AppCompatActivity
         ListView listView = (ListView) findViewById(R.id.dashboard_list_workouts_listview);
         listView.setAdapter(mWorkoutAdapter);
         setListViewHeightBasedOnItems(listView);
+        mRealm.close();
     }
 }

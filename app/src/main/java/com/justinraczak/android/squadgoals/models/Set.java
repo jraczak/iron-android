@@ -119,14 +119,16 @@ public class Set extends RealmObject implements Parcelable {
 
     public static Integer getNewAutoIncrementId() {
         Realm realm = Realm.getDefaultInstance();
-        Integer oldMaxId = (Integer) realm.where(Set.class).max("realmId");
-        Log.d(LOG_TAG, "old max id is " + oldMaxId);
-        if (oldMaxId == null) {
-            Log.d(LOG_TAG,"old max id was null");
+        //Integer oldMaxId = realm.where(Set.class).max("realmId").intValue();
+
+        if (realm.where(Set.class).max("realmId") == null) {
+            Log.d(LOG_TAG,"max table id was null, returning 1");
+            realm.close();
             return 1;
         } else {
-            Log.d(LOG_TAG, "old max id + 1 will be " + (oldMaxId+1));
-            return (oldMaxId+1);
+            Log.d(LOG_TAG, "incrementing max table id");
+            realm.close();
+            return (realm.where(Set.class).max("realmId").intValue()+1);
         }
     }
 }
