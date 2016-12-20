@@ -39,7 +39,7 @@ SetFragment.OnFragmentInteractionListener {
         mRealm = Realm.getDefaultInstance();
 
         //TODO: Check if there is a workout passed in before creating a new one
-        if (getIntent().getStringExtra("workoutId") == null) {
+        if (getIntent().getIntExtra("workoutId", 0) == 0) {
             mWorkout = new Workout(new Date().toString(), null, new Date());
             Log.d(LOG_TAG, "fragment's workout is: " + this.mWorkout);
             mRealm.beginTransaction();
@@ -48,7 +48,7 @@ SetFragment.OnFragmentInteractionListener {
             Log.d(LOG_TAG, "Created and saved workout " + mWorkout.getName() + " to realm.");
         } else {
             RealmResults<Workout> workoutRealmResults = mRealm.where(Workout.class)
-                    .equalTo("id", getIntent().getStringExtra("workoutId"))
+                    .equalTo("realmId", getIntent().getIntExtra("workoutId", 0))
                     .findAll();
             Log.d(LOG_TAG, workoutRealmResults.size() + " workouts found by searching ID");
             mWorkout = workoutRealmResults.first();
@@ -89,7 +89,7 @@ SetFragment.OnFragmentInteractionListener {
                 .remove(getFragmentManager().findFragmentByTag("SELECT_EXERCISE_FRAGMENT"))
                 .commit();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(exercise, mWorkout.getSetsForExercise(exercise));
+        ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(exercise, mWorkout.getSetCountForExercise(exercise));
         Log.d("LogWorkoutActivity", String.valueOf(R.id.content_log_workout));
 
         fragmentTransaction.add(R.id.exercise_fragment_container, exerciseFragment, name + "_fragment");
@@ -111,22 +111,34 @@ SetFragment.OnFragmentInteractionListener {
         return;
     }
 
-    public void onSetsSaved(Exercise exercise, Workout workout, int reps, int weight) {
+    public void onSetsSaved(Exercise exercise, Workout workout, int reps, float weight) {
         Log.d(LOG_TAG, "onSetsSaved called");
 
-        Set set = new Set(new Date(), workout, exercise, reps, weight);
 
+        //TODO: Save the set to the database
+        Integer id = Set.getNewAutoIncrementId();
+        Set set = new Set(id, new Date(), workout, exercise, reps, weight);
+        mRealm.beginTransaction();
+        Set realmSet = mRealm.createObject(Set.class, set);
+        //set.setWorkout(workout);
+        //set.setExercise(exercise);
+        //set.setDate(new Date());
+        //set.setReps(reps);
+        //set.setWeight(weight);
+        //set.setRealmId(Set.getNewAutoIncrementId());
+        mRealm.commitTransaction();
+
+        // Don't think I need this now: Long id = Set.getNewAutoIncrementId();
+        //Set set = new Set(new Date(), workout, exercise, reps, weight);
+        //mRealm.beginTransaction();
+        //mRealm.copyToRealm(set);
+        //mRealm.commitTransaction();
 
         SetFragment setFragment = SetFragment.newInstance(exercise, workout, set, reps, weight);
         Log.d(LOG_TAG, "Adding fragment to container");
         getFragmentManager().beginTransaction()
                 .add(R.id.container_saved_sets, setFragment, null)
                 .commit();
-
-        //TODO: Save the set to the database
-        mRealm.beginTransaction();
-        mRealm.copyToRealm(set);
-        mRealm.commitTransaction();
 
         Log.d(LOG_TAG, "Clearing text field values");
         //TODO: See if these should be variables in the class so they're not always looked up

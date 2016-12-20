@@ -2,9 +2,9 @@ package com.justinraczak.android.squadgoals.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.Date;
-import java.util.UUID;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -19,8 +19,10 @@ import io.realm.annotations.Required;
 
 public class Workout extends RealmObject implements Parcelable {
 
+    private static final String LOG_TAG = Workout.class.getSimpleName();
+
     @PrimaryKey
-    private String id;
+    private Integer realmId;
     @Required
     private String name;
     public RealmList<Set> sets;
@@ -28,7 +30,7 @@ public class Workout extends RealmObject implements Parcelable {
     private Date date;
 
     public Workout(String name, RealmList<Set> sets, Date date) {
-        this.id = UUID.randomUUID().toString();
+        this.realmId = getNewAutoIncrementId();
         this.name = name;
         this.date = date;
         this.sets = sets;
@@ -47,7 +49,7 @@ public class Workout extends RealmObject implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
+        dest.writeLong(realmId);
         dest.writeString(name);
         //TODO: Figure out if it matters that I don't pass all fields into writer
     }
@@ -91,12 +93,12 @@ public class Workout extends RealmObject implements Parcelable {
         this.date = date;
     }
 
-    public String getId() {
-        return id;
+    public Integer getRealmId() {
+        return realmId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRealmId(Integer id) {
+        this.realmId = id;
     }
 
     public String getName() {
@@ -140,7 +142,7 @@ public class Workout extends RealmObject implements Parcelable {
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Set> results;
 
-        results = realm.where(Set.class).equalTo("workout.id", this.getId())
+        results = realm.where(Set.class).equalTo("workout.realmId", this.getRealmId())
                 .equalTo("exercise.id", exercise.getId())
                 .findAll();
         return results.size();
@@ -150,9 +152,22 @@ public class Workout extends RealmObject implements Parcelable {
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Set> results;
 
-        results = realm.where(Set.class).equalTo("workout.id", this.getId())
+        results = realm.where(Set.class).equalTo("workout.realmId", this.getRealmId())
                 .equalTo("exercise.id", exercise.getId())
                 .findAll();
         return results;
+    }
+
+    private static Integer getNewAutoIncrementId() {
+        Realm realm = Realm.getDefaultInstance();
+        Integer oldMaxId = (Integer) realm.where(Workout.class).max("realmId");
+        Log.d(LOG_TAG, "old max id is " + oldMaxId);
+        if (oldMaxId == null) {
+            Log.d(LOG_TAG,"old max id was null");
+            return 1;
+        } else {
+            Log.d(LOG_TAG, "old max id + 1 will be " + (oldMaxId+1));
+            return (oldMaxId+1);
+        }
     }
 }

@@ -34,7 +34,7 @@ public class SetFragment extends Fragment {
     private Workout mWorkout;
     private Set mSet;
     private int mReps;
-    private int mWeight;
+    private float mWeight;
 
     private OnFragmentInteractionListener mListener;
 
@@ -53,14 +53,14 @@ public class SetFragment extends Fragment {
      * @return A new instance of fragment SetFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SetFragment newInstance(Exercise exercise, Workout workout, Set set, int reps, int weight) {
+    public static SetFragment newInstance(Exercise exercise, Workout workout, Set set, int reps, float weight) {
         SetFragment fragment = new SetFragment();
         Bundle args = new Bundle();
         args.putParcelable("exercise", exercise);
         args.putParcelable("workout", workout);
         args.putParcelable("set", set);
         args.putInt("reps", reps);
-        args.putInt("weight", weight);
+        args.putFloat("weight", weight);
         fragment.setArguments(args);
         return fragment;
     }
@@ -72,7 +72,7 @@ public class SetFragment extends Fragment {
             mExercise = getArguments().getParcelable("exercise");
             mWorkout = getArguments().getParcelable("workout");
             mReps = getArguments().getInt("reps");
-            mWeight = getArguments().getInt("weight");
+            mWeight = getArguments().getFloat("weight");
         }
     }
 

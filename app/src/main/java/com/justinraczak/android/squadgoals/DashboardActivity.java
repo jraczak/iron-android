@@ -112,8 +112,9 @@ public class DashboardActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO: Change this to load the selected workout in log mode
                 Intent intent = new Intent(getApplicationContext(), LogWorkoutActivity.class);
-                intent.putExtra("workoutId", mWorkoutRealmResults.get(position).getId());
-                Log.d(TAG, "Putting workout " + mWorkoutRealmResults.get(position).getId() +
+                intent.putExtra(
+                        "workoutId", mWorkoutRealmResults.get(position).getRealmId());
+                Log.d(TAG, "Putting workout " + mWorkoutRealmResults.get(position).getRealmId() +
                 " into intent.");
                 startActivity(intent);
                 //TODO: Remove the toast once workout is successfully passed to log activity

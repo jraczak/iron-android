@@ -2,9 +2,11 @@ package com.justinraczak.android.squadgoals.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.Date;
 
+import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -15,8 +17,10 @@ import io.realm.annotations.Required;
 
 public class Set extends RealmObject implements Parcelable {
 
+    private final static String LOG_TAG = Set.class.getSimpleName();
+
     @PrimaryKey
-    private String id;
+    private Integer realmId;
     @Required
     private Date date;
     private Workout workout;
@@ -24,7 +28,8 @@ public class Set extends RealmObject implements Parcelable {
     private int reps;
     private float weight;
 
-    public Set(Date date, Workout workout, Exercise exercise, int reps, float weight) {
+    public Set(Integer id, Date date, Workout workout, Exercise exercise, int reps, float weight) {
+        this.realmId = id;
         this.date = date;
         this.workout = workout;
         this.exercise = exercise;
@@ -45,7 +50,7 @@ public class Set extends RealmObject implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
+        dest.writeInt(realmId);
         dest.writeParcelable(workout, 0);
         dest.writeParcelable(exercise, 0);
         dest.writeInt(reps);
@@ -80,12 +85,12 @@ public class Set extends RealmObject implements Parcelable {
         this.exercise = exercise;
     }
 
-    public String getId() {
-        return id;
+    public Integer getRealmId() {
+        return realmId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRealmId(int id) {
+        this.realmId = id;
     }
 
     public int getReps() {
@@ -110,5 +115,18 @@ public class Set extends RealmObject implements Parcelable {
 
     public void setWorkout(Workout workout) {
         this.workout = workout;
+    }
+
+    public static Integer getNewAutoIncrementId() {
+        Realm realm = Realm.getDefaultInstance();
+        Integer oldMaxId = (Integer) realm.where(Set.class).max("realmId");
+        Log.d(LOG_TAG, "old max id is " + oldMaxId);
+        if (oldMaxId == null) {
+            Log.d(LOG_TAG,"old max id was null");
+            return 1;
+        } else {
+            Log.d(LOG_TAG, "old max id + 1 will be " + (oldMaxId+1));
+            return (oldMaxId+1);
+        }
     }
 }

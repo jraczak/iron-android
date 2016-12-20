@@ -85,7 +85,7 @@ public class ExerciseFragment extends Fragment {
         TextView textView = (TextView) view.findViewById(R.id.exercise_name);
         TextView setCountTextView = (TextView) view.findViewById(R.id.set_count);
         textView.setText(this.mExercise.getName());
-        setCountTextView.setText(((LogWorkoutActivity)getActivity()).getWorkout().getSetsForExercise(mExercise) + " " + getResources().getString(R.string.sets_label));
+        setCountTextView.setText(((LogWorkoutActivity)getActivity()).getWorkout().getSetCountForExercise(mExercise) + " " + getResources().getString(R.string.sets_label));
 
         Log.d(LOG_TAG, "setting layout params of card");
         //view.setPadding(16, 24, 16, 24);

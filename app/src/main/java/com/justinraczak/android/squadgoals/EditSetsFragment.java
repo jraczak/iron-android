@@ -1,6 +1,7 @@
 package com.justinraczak.android.squadgoals;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.InputType;
@@ -12,7 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.justinraczak.android.squadgoals.models.Exercise;
+import com.justinraczak.android.squadgoals.models.Set;
 import com.justinraczak.android.squadgoals.models.Workout;
+
+import io.realm.RealmResults;
 
 
 /**
@@ -86,7 +90,16 @@ public class EditSetsFragment extends Fragment {
         });
 
         //TODO: Make sure existing sets are loaded into the view
-
+        RealmResults<Set> sets = mWorkout.getSetsForExercise(mExercise);
+        if (sets.size() > 0) {
+            FragmentManager fragmentManager = getFragmentManager();
+            for (Set set : sets) {
+                SetFragment setFragment = SetFragment.newInstance(mExercise, mWorkout, set, set.getReps(), set.getWeight());
+                fragmentManager.beginTransaction()
+                        .add(R.id.container_saved_sets, setFragment)
+                        .commit();
+            }
+        }
 
         return view;
     }
@@ -139,6 +152,6 @@ public class EditSetsFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onSetsSaved(Exercise exercise, Workout workout, int reps, int weight);
+        void onSetsSaved(Exercise exercise, Workout workout, int reps, float weight);
     }
 }
