@@ -34,6 +34,12 @@ public class EditSetsFragment extends Fragment {
     private static final String ARG_PARAM2 = "workout";
     private static final String LOG_TAG = EditSetsFragment.class.getSimpleName();
 
+    // Text fields and controls for the logger
+    public EditText mRepsEditText;
+    public EditText mWeightEditText;
+    public Button mSaveButton;
+    public Button mClearButton;
+
     // TODO: Rename and change types of parameters
     private Exercise mExercise;
     private Workout mWorkout;
@@ -77,19 +83,19 @@ public class EditSetsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_sets, container, false);
-        Button saveButton = (Button) view.findViewById(R.id.button_save_set);
-        EditText repsEditText = (EditText) view.findViewById(R.id.edit_text_reps);
-        repsEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-        EditText weightEditText = (EditText) view.findViewById(R.id.edit_text_weight);
-        weightEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-        saveButton.setOnClickListener(new View.OnClickListener() {
+        mSaveButton = (Button) view.findViewById(R.id.button_save_set);
+        mRepsEditText = (EditText) view.findViewById(R.id.edit_text_reps);
+        mRepsEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mWeightEditText = (EditText) view.findViewById(R.id.edit_text_weight);
+        mWeightEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onSaveButtonPressed(mExercise, mWorkout);
             }
         });
 
-        //TODO: Make sure existing sets are loaded into the view
+        // Make sure any existing sets are loaded into the view
         RealmResults<Set> sets = mWorkout.getSetsForExercise(mExercise);
         if (sets.size() > 0) {
             FragmentManager fragmentManager = getFragmentManager();
@@ -108,14 +114,12 @@ public class EditSetsFragment extends Fragment {
     public void onSaveButtonPressed(Exercise exercise, Workout workout) {
         if (mListener != null) {
 
-            EditText repsEditText = (EditText) getView().findViewById(R.id.edit_text_reps);
             Log.d(LOG_TAG, "Fetching int value of reps");
-            int reps = Integer.parseInt(String.valueOf(repsEditText.getText()));
+            int reps = Integer.parseInt(String.valueOf(mRepsEditText.getText()));
             Log.d(LOG_TAG, "Reps value is " + reps);
 
-            EditText weightEditText = (EditText) getView().findViewById(R.id.edit_text_weight);
             Log.d(LOG_TAG, "Fetching int value of weight");
-            int weight = Integer.parseInt(String.valueOf(weightEditText.getText()));
+            int weight = Integer.parseInt(String.valueOf(mWeightEditText.getText()));
             Log.d(LOG_TAG, "Weight value is " + weight);
 
             Log.d(LOG_TAG, "Sending parsed input values to activity");

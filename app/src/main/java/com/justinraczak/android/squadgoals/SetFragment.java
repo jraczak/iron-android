@@ -2,7 +2,6 @@ package com.justinraczak.android.squadgoals;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -69,6 +68,7 @@ public class SetFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            mSet = getArguments().getParcelable("set");
             mExercise = getArguments().getParcelable("exercise");
             mWorkout = getArguments().getParcelable("workout");
             mReps = getArguments().getInt("reps");
@@ -86,13 +86,19 @@ public class SetFragment extends Fragment {
         Log.d("SetFragment", "TextView is " + repTextView);
         repTextView.setText(String.valueOf(this.mReps));
         weightTextView.setText(String.valueOf(this.mWeight));
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSetSelected(mSet);
+            }
+        });
         return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onSetSelected(Set set) {
         if (mListener != null) {
-            mListener.onSetSelected(uri);
+            mListener.onSetSelected(set);
         }
     }
 
@@ -125,6 +131,6 @@ public class SetFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onSetSelected(Uri uri);
+        void onSetSelected(Set set);
     }
 }

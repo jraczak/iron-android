@@ -1,13 +1,13 @@
 package com.justinraczak.android.squadgoals;
 
 import android.app.FragmentTransaction;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -166,9 +166,21 @@ SetFragment.OnFragmentInteractionListener {
 
     }
 
-    public void onSetSelected(Uri uri) {
+    public void onSetSelected(Set set) {
         Log.d(LOG_TAG, "onSetSelected callback initiated");
         //TODO: Change the logger to edit mode on this action
+        EditText repsEditText = (EditText) findViewById(R.id.edit_text_reps);
+        EditText weightEditText = (EditText) findViewById(R.id.edit_text_weight);
+        repsEditText.setText(String.valueOf(set.getReps()));
+        weightEditText.setText(String.valueOf(set.getWeight()));
+        toggleSaveButton("blank");
+    }
+
+    public void toggleSaveButton(String mode) {
+        Button button = (Button) findViewById(R.id.button_save_set);
+        button.setText("UPDATE SET");
+        button.setBackgroundColor(getResources().getColor(R.color.accent));
+        //TODO: Make case statement to read passed value, toggle between on click listeners
     }
 
     public Workout getWorkout() {
