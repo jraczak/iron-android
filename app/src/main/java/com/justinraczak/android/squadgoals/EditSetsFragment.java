@@ -90,6 +90,7 @@ public class EditSetsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_sets, container, false);
         mSaveButton = (Button) view.findViewById(R.id.button_save_set);
+        mClearButton = (Button) view.findViewById(R.id.button_clear_edittext_values);
         mRepsEditText = (EditText) view.findViewById(R.id.edit_text_reps);
         mRepsEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
         mWeightEditText = (EditText) view.findViewById(R.id.edit_text_weight);
@@ -98,6 +99,12 @@ public class EditSetsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 onSaveButtonPressed(mExercise, mWorkout);
+            }
+        });
+        mClearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearTextFields();
             }
         });
 
@@ -150,6 +157,12 @@ public class EditSetsFragment extends Fragment {
             mListener.onSetUpdated(set, reps, weight);
         }
 
+    }
+
+    public void clearTextFields() {
+        mWeightEditText.setText("");
+        mRepsEditText.setText("");
+        mWeightEditText.requestFocus();
     }
 
     @Override

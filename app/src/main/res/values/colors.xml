@@ -10,4 +10,7 @@
     <color name="divider">#BDBDBD</color>
 
     <color name="background_dark">#22303f</color>
+
+    <color name="button_primary">#517bc1</color>
+    <color name="button_secondary">#8946ac</color>
 </resources>
