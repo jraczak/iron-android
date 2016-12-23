@@ -2,45 +2,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="24dp"
-    android:layout_marginEnd="24dp"
+    android:gravity="center_horizontal"
+    android:layout_margin="24dp"
+    android:background="@color/primary_dark"
     tools:context="com.justinraczak.android.squadgoals.EditSetsFragment"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Weight"
-        android:textSize="24sp" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
     <EditText
         android:id="@+id/edit_text_weight"
         android:inputType="number"
         android:digits="0123456789"
-        android:layout_width="match_parent"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="48dp"
+        android:paddingBottom="0dp"
         android:maxLines="1"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Display4"
+        android:textSize="84sp"
+        android:textAlignment="center"
+        android:textColor="@color/primary_text"
+        tools:text="100"
         />
-
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reps"
-        android:textSize="24sp" />
+        android:text="Weight"
+        android:textSize="14sp"
+        android:textColor="@color/secondary_text"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="24dp">
     <EditText
         android:id="@+id/edit_text_reps"
         android:inputType="number"
         android:digits="0123456789"
-        android:layout_width="match_parent"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="48dp"
         android:maxLines="1"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Display4"
+        android:textAlignment="center"
+        android:textSize="84sp"
+        android:textColor="@color/primary_text"
+        tools:text="100"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reps"
+        android:textSize="14sp"
+        android:textColor="@color/secondary_text"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_save_set"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"/>
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="36dp"
+        android:text="Save"
+        android:background="@color/accent"
+        android:textColor="@android:color/white"/>
 
     <LinearLayout
         android:id="@+id/container_saved_sets"

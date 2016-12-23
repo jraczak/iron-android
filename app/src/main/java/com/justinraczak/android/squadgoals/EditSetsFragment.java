@@ -113,6 +113,8 @@ public class EditSetsFragment extends Fragment {
             }
         }
 
+        mWeightEditText.requestFocus();
+
         return view;
     }
 

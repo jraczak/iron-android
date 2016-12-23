@@ -31,7 +31,7 @@
             android:name=".LogWorkoutActivity"
             android:label="@string/title_activity_log_workout"
             android:parentActivityName=".DashboardActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/MainTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.justinraczak.android.squadgoals.DashboardActivity" />

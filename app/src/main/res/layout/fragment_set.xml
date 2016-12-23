@@ -19,12 +19,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="REPS"/>
+                android:text="REPS"
+                android:textColor="@android:color/white"/>
             <TextView
                 android:id="@+id/rep_count"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/hello_blank_fragment" />
+                android:text="@string/hello_blank_fragment"
+                android:textColor="@android:color/white"/>
         </LinearLayout>
 
         <LinearLayout
@@ -35,12 +37,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="WEIGHT (LBS)"/>
+                android:text="WEIGHT (LBS)"
+                android:textColor="@android:color/white"/>
             <TextView
                 android:id="@+id/weight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/hello_blank_fragment" />
+                android:text="@string/hello_blank_fragment"
+                android:textColor="@android:color/white"/>
         </LinearLayout>
     </LinearLayout>
 
