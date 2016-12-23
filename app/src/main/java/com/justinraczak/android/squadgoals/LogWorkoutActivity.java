@@ -16,6 +16,7 @@ import com.justinraczak.android.squadgoals.models.Set;
 import com.justinraczak.android.squadgoals.models.Workout;
 
 import java.util.Date;
+import java.util.UUID;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -29,6 +30,9 @@ SetFragment.OnFragmentInteractionListener {
     private static final String LOG_TAG = LogWorkoutActivity.class.getSimpleName();
     public Workout mWorkout;
     private Realm mRealm;
+    private String mSaveButtonState;
+    private Set mEditingSet;
+    private SetFragment mEditingFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +86,8 @@ SetFragment.OnFragmentInteractionListener {
         //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle("Log workout");
 
+        mSaveButtonState = "save";
+
         //TODO: Figure out how to deal with closing Realms
 
     }
@@ -113,7 +119,7 @@ SetFragment.OnFragmentInteractionListener {
         EditSetsFragment editSetsFragment = EditSetsFragment.newInstance(workout, exercise);
         //Replace the fragment now that it is added programmatically instead of via xml, which doesn't work
         getFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container_log_workout, editSetsFragment)
+                .replace(R.id.fragment_container_log_workout, editSetsFragment, "EDIT_SETS_FRAGMENT")
                 .addToBackStack("add_edit_sets_fragment")
                 .commit();
         return;
@@ -151,7 +157,7 @@ SetFragment.OnFragmentInteractionListener {
         SetFragment setFragment = SetFragment.newInstance(exercise, workout, set, reps, weight);
         Log.d(LOG_TAG, "Adding fragment to container");
         getFragmentManager().beginTransaction()
-                .add(R.id.container_saved_sets, setFragment, null)
+                .add(R.id.container_saved_sets, setFragment, UUID.randomUUID().toString())
                 .commit();
 
         Log.d(LOG_TAG, "Clearing text field values");
@@ -166,21 +172,75 @@ SetFragment.OnFragmentInteractionListener {
 
     }
 
-    public void onSetSelected(Set set) {
+    public void onSetUpdated(Set set, int updatedReps, int updatedWeight) {
+
+        mRealm.beginTransaction();
+        Log.d(LOG_TAG, "Setting updated values on set");
+
+        set.setReps(updatedReps);
+        set.setWeight(updatedWeight);
+
+        Log.d(LOG_TAG, "Updating object in realm");
+        mRealm.copyToRealmOrUpdate(set);
+        mRealm.commitTransaction();
+
+        Log.d(LOG_TAG, "Resetting edited set to null");
+        mEditingSet = null;
+
+        toggleSaveButton("save", null);
+
+        Toast.makeText(getApplicationContext(), "Set updated", Toast.LENGTH_SHORT).show();
+
+        //TODO: Update the UI values for the updated set
+        mEditingFragment.updateDisplayValues();
+
+    }
+
+    public void onSetSelected(Set set, String fragmentTag) {
         Log.d(LOG_TAG, "onSetSelected callback initiated");
         //TODO: Change the logger to edit mode on this action
         EditText repsEditText = (EditText) findViewById(R.id.edit_text_reps);
         EditText weightEditText = (EditText) findViewById(R.id.edit_text_weight);
         repsEditText.setText(String.valueOf(set.getReps()));
         weightEditText.setText(String.valueOf(set.getWeight()));
-        toggleSaveButton("blank");
+
+        mEditingSet = set;
+        Log.d(LOG_TAG, "Looking for fragment with tag " + fragmentTag);
+        mEditingFragment = (SetFragment) getFragmentManager().findFragmentByTag(fragmentTag);
+
+
+        toggleSaveButton("update", set);
+
     }
 
-    public void toggleSaveButton(String mode) {
-        Button button = (Button) findViewById(R.id.button_save_set);
-        button.setText("UPDATE SET");
-        button.setBackgroundColor(getResources().getColor(R.color.accent));
-        //TODO: Make case statement to read passed value, toggle between on click listeners
+    public void toggleSaveButton(String mode, Set set) {
+
+        Button saveButton = (Button) findViewById(R.id.button_save_set);
+        final EditSetsFragment editSetsFragment = (EditSetsFragment) getFragmentManager().findFragmentByTag("EDIT_SETS_FRAGMENT");
+        switch (mode) {
+            case "save":
+                Log.d(LOG_TAG, "Setting the controls to save mode.");
+                saveButton.setText("SAVE");
+                saveButton.setBackgroundColor(getResources().getColor(R.color.primary_light));
+                saveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        editSetsFragment.onSaveButtonPressed(editSetsFragment.getmExercise(), mWorkout);
+                    }
+                });
+                break;
+            case "update":
+                Log.d(LOG_TAG, "Setting the controls to update mode.");
+                saveButton.setText("UPDATE");
+                saveButton.setBackgroundColor(getResources().getColor(R.color.accent));
+                saveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        editSetsFragment.onUpdateButtonPressed(mEditingSet);
+                    }
+                });
+                break;
+        }
     }
 
     public Workout getWorkout() {

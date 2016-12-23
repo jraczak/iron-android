@@ -34,6 +34,10 @@ public class SetFragment extends Fragment {
     private Set mSet;
     private int mReps;
     private float mWeight;
+    //private String mTag;
+
+    private TextView mRepsTextView;
+    private TextView mWeightTextview;
 
     private OnFragmentInteractionListener mListener;
 
@@ -60,6 +64,7 @@ public class SetFragment extends Fragment {
         args.putParcelable("set", set);
         args.putInt("reps", reps);
         args.putFloat("weight", weight);
+        //args.putString("tag", tag);
         fragment.setArguments(args);
         return fragment;
     }
@@ -73,6 +78,7 @@ public class SetFragment extends Fragment {
             mWorkout = getArguments().getParcelable("workout");
             mReps = getArguments().getInt("reps");
             mWeight = getArguments().getFloat("weight");
+            //mTag = getArguments().getString("tag");
         }
     }
 
@@ -81,11 +87,11 @@ public class SetFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_set, container, false);
-        TextView repTextView = (TextView) view.findViewById(R.id.rep_count);
-        TextView weightTextView = (TextView) view.findViewById(R.id.weight);
-        Log.d("SetFragment", "TextView is " + repTextView);
-        repTextView.setText(String.valueOf(this.mReps));
-        weightTextView.setText(String.valueOf(this.mWeight));
+        mRepsTextView = (TextView) view.findViewById(R.id.rep_count);
+        mWeightTextview = (TextView) view.findViewById(R.id.weight);
+        Log.d("SetFragment", "TextView is " + mRepsTextView);
+        mRepsTextView.setText(String.valueOf(this.mReps));
+        mWeightTextview.setText(String.valueOf(this.mWeight));
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +104,8 @@ public class SetFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onSetSelected(Set set) {
         if (mListener != null) {
-            mListener.onSetSelected(set);
+            Log.d("SetFragment", "Fragment's tag is " + this.getTag());
+            mListener.onSetSelected(set, this.getTag());
         }
     }
 
@@ -119,6 +126,11 @@ public class SetFragment extends Fragment {
         mListener = null;
     }
 
+    public void updateDisplayValues() {
+        mRepsTextView.setText(String.valueOf(this.mSet.getReps()));
+        mWeightTextview.setText(String.valueOf(this.mSet.getWeight()));
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -131,6 +143,6 @@ public class SetFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onSetSelected(Set set);
+        void onSetSelected(Set set, String fragmentTag);
     }
 }

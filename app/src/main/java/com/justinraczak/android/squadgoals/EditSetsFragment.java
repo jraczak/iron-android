@@ -16,6 +16,8 @@ import com.justinraczak.android.squadgoals.models.Exercise;
 import com.justinraczak.android.squadgoals.models.Set;
 import com.justinraczak.android.squadgoals.models.Workout;
 
+import java.util.UUID;
+
 import io.realm.RealmResults;
 
 
@@ -69,6 +71,10 @@ public class EditSetsFragment extends Fragment {
         return fragment;
     }
 
+    public Exercise getmExercise() {
+        return mExercise;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +108,7 @@ public class EditSetsFragment extends Fragment {
             for (Set set : sets) {
                 SetFragment setFragment = SetFragment.newInstance(mExercise, mWorkout, set, set.getReps(), set.getWeight());
                 fragmentManager.beginTransaction()
-                        .add(R.id.container_saved_sets, setFragment)
+                        .add(R.id.container_saved_sets, setFragment, UUID.randomUUID().toString())
                         .commit();
             }
         }
@@ -125,6 +131,23 @@ public class EditSetsFragment extends Fragment {
             Log.d(LOG_TAG, "Sending parsed input values to activity");
             mListener.onSetsSaved(exercise, workout, reps, weight);
         }
+    }
+
+    public void onUpdateButtonPressed(Set set) {
+        if (mListener != null) {
+
+            Log.d(LOG_TAG, "Fetching int value of updated reps");
+            int reps = Integer.parseInt(String.valueOf(mRepsEditText.getText()));
+            Log.d(LOG_TAG, "Reps value is " + reps);
+
+            Log.d(LOG_TAG, "Fetching int value of updated weight");
+            int weight = Integer.parseInt(String.valueOf(mWeightEditText.getText()));
+            Log.d(LOG_TAG, "Weight value is " + weight);
+
+            Log.d(LOG_TAG, "Sending parsed values to onSetUpdated interface");
+            mListener.onSetUpdated(set, reps, weight);
+        }
+
     }
 
     @Override
@@ -157,5 +180,6 @@ public class EditSetsFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onSetsSaved(Exercise exercise, Workout workout, int reps, float weight);
+        void onSetUpdated(Set set, int updatedReps, int updatedWeight);
     }
 }
