@@ -187,7 +187,7 @@ SetFragment.OnFragmentInteractionListener {
         Log.d(LOG_TAG, "Resetting edited set to null");
         mEditingSet = null;
 
-        toggleSaveButton("save", null);
+        toggleButtons("save", null);
 
         Toast.makeText(getApplicationContext(), "Set updated", Toast.LENGTH_SHORT).show();
 
@@ -196,47 +196,77 @@ SetFragment.OnFragmentInteractionListener {
 
     }
 
+    public void onSetDeleted(Set set) {
+        mRealm.beginTransaction();
+        Log.d(LOG_TAG, "Preparing to delete set with realm id " + set.getRealmId());
+
+        set.deleteFromRealm();
+        mRealm.commitTransaction();
+        Log.d(LOG_TAG, "Set was deleted: " + (!set.isValid()));
+        getFragmentManager().beginTransaction()
+                .remove(mEditingFragment)
+                .commit();
+        Toast.makeText(this, "Set deleted", Toast.LENGTH_SHORT).show();
+    }
+
     public void onSetSelected(Set set, String fragmentTag) {
         Log.d(LOG_TAG, "onSetSelected callback initiated");
         //TODO: Change the logger to edit mode on this action
         EditText repsEditText = (EditText) findViewById(R.id.edit_text_reps);
         EditText weightEditText = (EditText) findViewById(R.id.edit_text_weight);
         repsEditText.setText(String.valueOf(set.getReps()));
-        weightEditText.setText(String.valueOf(set.getWeight()));
+        weightEditText.setText(String.valueOf(Math.round(set.getWeight())));
 
         mEditingSet = set;
         Log.d(LOG_TAG, "Looking for fragment with tag " + fragmentTag);
         mEditingFragment = (SetFragment) getFragmentManager().findFragmentByTag(fragmentTag);
 
 
-        toggleSaveButton("update", set);
+        toggleButtons("update", set);
 
     }
 
-    public void toggleSaveButton(String mode, Set set) {
+    public void toggleButtons(String mode, Set set) {
 
-        Button saveButton = (Button) findViewById(R.id.button_save_set);
+        Button saveUpdateButton = (Button) findViewById(R.id.button_save_set);
+        Button clearDeleteButton = (Button) findViewById(R.id.button_clear_edittext_values);
         final EditSetsFragment editSetsFragment = (EditSetsFragment) getFragmentManager().findFragmentByTag("EDIT_SETS_FRAGMENT");
         switch (mode) {
             case "save":
                 Log.d(LOG_TAG, "Setting the controls to save mode.");
-                saveButton.setText("SAVE");
-                saveButton.setBackgroundColor(getResources().getColor(R.color.primary_light));
-                saveButton.setOnClickListener(new View.OnClickListener() {
+                saveUpdateButton.setText("SAVE");
+                saveUpdateButton.setBackgroundColor(getResources().getColor(R.color.button_primary));
+                saveUpdateButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         editSetsFragment.onSaveButtonPressed(editSetsFragment.getmExercise(), mWorkout);
                     }
                 });
+                clearDeleteButton.setText("CLEAR");
+                clearDeleteButton.setBackgroundColor(getResources().getColor(R.color.button_secondary));
+                clearDeleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        editSetsFragment.clearTextFields();
+                    }
+                });
                 break;
             case "update":
                 Log.d(LOG_TAG, "Setting the controls to update mode.");
-                saveButton.setText("UPDATE");
-                saveButton.setBackgroundColor(getResources().getColor(R.color.accent));
-                saveButton.setOnClickListener(new View.OnClickListener() {
+                saveUpdateButton.setText("UPDATE");
+                saveUpdateButton.setBackgroundColor(getResources().getColor(R.color.button_secondary));
+                saveUpdateButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         editSetsFragment.onUpdateButtonPressed(mEditingSet);
+                    }
+                });
+                clearDeleteButton.setText("DELETE");
+                clearDeleteButton.setBackgroundColor(getResources().getColor(R.color.button_warning));
+                clearDeleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        editSetsFragment.onDeleteButtonPressed(mEditingSet);
                     }
                 });
                 break;

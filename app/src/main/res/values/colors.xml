@@ -13,4 +13,5 @@
 
     <color name="button_primary">#517bc1</color>
     <color name="button_secondary">#8946ac</color>
+    <color name="button_warning">#e75f57</color>
 </resources>

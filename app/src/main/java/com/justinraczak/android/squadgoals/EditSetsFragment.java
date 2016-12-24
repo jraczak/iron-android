@@ -159,6 +159,12 @@ public class EditSetsFragment extends Fragment {
 
     }
 
+    public void onDeleteButtonPressed(Set set) {
+        if (mListener != null) {
+            mListener.onSetDeleted(set);
+        }
+    }
+
     public void clearTextFields() {
         mWeightEditText.setText("");
         mRepsEditText.setText("");
@@ -196,5 +202,6 @@ public class EditSetsFragment extends Fragment {
         // TODO: Update argument type and name
         void onSetsSaved(Exercise exercise, Workout workout, int reps, float weight);
         void onSetUpdated(Set set, int updatedReps, int updatedWeight);
+        void onSetDeleted(Set set);
     }
 }
