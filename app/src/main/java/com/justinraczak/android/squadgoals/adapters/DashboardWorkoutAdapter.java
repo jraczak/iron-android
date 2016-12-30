@@ -83,6 +83,7 @@ public class DashboardWorkoutAdapter extends BaseAdapter {
         setCountTextView = (TextView) cardView.findViewById(R.id.workout_card_set_count);
         //TODO: Abide the rules and don't use string concatenation here
         setCountTextView.setText(String.valueOf(workout.getSets().size()) + " sets");
+        Log.d(LOG_TAG, "Workout has " + String.valueOf(workout.getSets() + " sets"));
         exerciseCountTextView = (TextView) cardView.findViewById(R.id.workout_card_exercise_count);
         exerciseCountTextView.setText(String.valueOf(workout.getExercises().size()) + " exercises");
         deleteWorkoutButton = (Button) cardView.findViewById(R.id.button_delete_workout);

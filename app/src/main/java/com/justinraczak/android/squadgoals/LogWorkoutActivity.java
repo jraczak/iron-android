@@ -144,7 +144,7 @@ SetFragment.OnFragmentInteractionListener {
         set.setWeight(weight);
         //set.setRealmId(Set.getNewAutoIncrementId());
         mRealm.commitTransaction();
-        Log.d(LOG_TAG, "id of managed realm set is " + set.getRealmId());
+        Log.d(LOG_TAG, "id of managed realm set is " + set.getRealmId() + " and workout id is " + set.getWorkout().getRealmId());
         //Log.d(LOG_TAG, "id of managed realm object is " + realmSet.getRealmId());
         mRealm.close();
 

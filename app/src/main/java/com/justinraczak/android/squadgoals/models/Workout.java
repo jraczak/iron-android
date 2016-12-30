@@ -25,7 +25,7 @@ public class Workout extends RealmObject implements Parcelable {
     private Integer realmId;
     @Required
     private String name;
-    public RealmList<Set> sets;
+    private RealmList<Set> sets;
     public RealmList<Exercise> exercises;
     private Date date;
     private Date startTime;
