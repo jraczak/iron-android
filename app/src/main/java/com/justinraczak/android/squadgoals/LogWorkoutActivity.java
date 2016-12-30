@@ -207,6 +207,8 @@ SetFragment.OnFragmentInteractionListener {
                 .remove(mEditingFragment)
                 .commit();
         Toast.makeText(this, "Set deleted", Toast.LENGTH_SHORT).show();
+
+        toggleButtons("save", null);
     }
 
     public void onSetSelected(Set set, String fragmentTag) {
