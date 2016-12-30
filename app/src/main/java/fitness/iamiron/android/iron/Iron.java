@@ -3,8 +3,6 @@ package fitness.iamiron.android.iron;
 import android.app.Application;
 import android.util.Log;
 
-import fitness.iamiron.android.iron.models.Exercise;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,6 +10,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 
+import fitness.iamiron.android.iron.models.Exercise;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -19,9 +18,9 @@ import io.realm.RealmConfiguration;
  * Created by Justin on 9/29/16.
  */
 
-public class SquadGoals extends Application {
+public class Iron extends Application {
 
-    private final String LOG_TAG = SquadGoals.class.getSimpleName();
+    private final String LOG_TAG = Iron.class.getSimpleName();
     private Realm realm;
 
     @Override

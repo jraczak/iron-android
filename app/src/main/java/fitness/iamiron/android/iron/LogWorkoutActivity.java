@@ -11,13 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import fitness.iamiron.android.iron.models.Exercise;
-import fitness.iamiron.android.iron.models.Set;
-import fitness.iamiron.android.iron.models.Workout;
-
 import java.util.Date;
 import java.util.UUID;
 
+import fitness.iamiron.android.iron.models.Exercise;
+import fitness.iamiron.android.iron.models.Set;
+import fitness.iamiron.android.iron.models.Workout;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -142,9 +141,11 @@ SetFragment.OnFragmentInteractionListener {
         set.setDate(new Date());
         set.setReps(reps);
         set.setWeight(weight);
-        //set.setRealmId(Set.getNewAutoIncrementId());
         mRealm.commitTransaction();
+        // Need to ALSO set the set on the workout explicitly, relationship is not built implicitly unidirectionally
+        workout.addSet(set);
         Log.d(LOG_TAG, "id of managed realm set is " + set.getRealmId() + " and workout id is " + set.getWorkout().getRealmId());
+        Log.d(LOG_TAG, "Workout " + workout.getRealmId() + " now has " + workout.getSets().size() + " sets");
         //Log.d(LOG_TAG, "id of managed realm object is " + realmSet.getRealmId());
         mRealm.close();
 
@@ -207,6 +208,7 @@ SetFragment.OnFragmentInteractionListener {
                 .remove(mEditingFragment)
                 .commit();
         Toast.makeText(this, "Set deleted", Toast.LENGTH_SHORT).show();
+        mRealm.close();
 
         toggleButtons("save", null);
     }

@@ -143,7 +143,6 @@ public class Workout extends RealmObject implements Parcelable {
         realm.beginTransaction();
         this.sets.add(set);
         realm.commitTransaction();
-        realm.close();
     }
 
     public RealmList<Exercise> getExercises() {
