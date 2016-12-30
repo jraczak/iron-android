@@ -1,4 +1,4 @@
-package com.justinraczak.android.squadgoals;
+package fitness.iamiron.android.iron;
 
 import android.content.Intent;
 import android.icu.text.DateFormat;
@@ -25,9 +25,9 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.justinraczak.android.squadgoals.adapters.DashboardWorkoutAdapter;
-import com.justinraczak.android.squadgoals.models.Exercise;
-import com.justinraczak.android.squadgoals.models.Workout;
+import fitness.iamiron.android.iron.adapters.DashboardWorkoutAdapter;
+import fitness.iamiron.android.iron.models.Exercise;
+import fitness.iamiron.android.iron.models.Workout;
 
 import java.util.Date;
 

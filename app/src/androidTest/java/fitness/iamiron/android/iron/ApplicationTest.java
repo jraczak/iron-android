@@ -1,4 +1,4 @@
-package com.justinraczak.android.squadgoals;
+package fitness.iamiron.android.iron;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

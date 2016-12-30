@@ -1,4 +1,4 @@
-package com.justinraczak.android.squadgoals;
+package fitness.iamiron.android.iron;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -12,8 +12,8 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.justinraczak.android.squadgoals.adapters.SelectExerciseAdapter;
-import com.justinraczak.android.squadgoals.models.Exercise;
+import fitness.iamiron.android.iron.adapters.SelectExerciseAdapter;
+import fitness.iamiron.android.iron.models.Exercise;
 
 import io.realm.Realm;
 import io.realm.RealmQuery;

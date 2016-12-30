@@ -1,4 +1,4 @@
-package com.justinraczak.android.squadgoals;
+package fitness.iamiron.android.iron;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.justinraczak.android.squadgoals.models.Exercise;
-import com.justinraczak.android.squadgoals.models.Set;
-import com.justinraczak.android.squadgoals.models.Workout;
+import fitness.iamiron.android.iron.models.Exercise;
+import fitness.iamiron.android.iron.models.Set;
+import fitness.iamiron.android.iron.models.Workout;
 
 import java.util.UUID;
 

@@ -6,7 +6,7 @@ android {
     buildToolsVersion "24.0.2"
 
     defaultConfig {
-        applicationId "com.justinraczak.android.squadgoals"
+        applicationId "fitness.iamiron.android.iron"
         minSdkVersion 24
         targetSdkVersion 24
         multiDexEnabled true

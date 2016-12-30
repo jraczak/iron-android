@@ -1,4 +1,4 @@
-package com.justinraczak.android.squadgoals;
+package fitness.iamiron.android.iron;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

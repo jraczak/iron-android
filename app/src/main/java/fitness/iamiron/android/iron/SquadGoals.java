@@ -1,9 +1,9 @@
-package com.justinraczak.android.squadgoals;
+package fitness.iamiron.android.iron;
 
 import android.app.Application;
 import android.util.Log;
 
-import com.justinraczak.android.squadgoals.models.Exercise;
+import fitness.iamiron.android.iron.models.Exercise;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.justinraczak.android.squadgoals.ExerciseFragment"
+    tools:context="com.justinraczak.android.squadgoals.fitness.justinraczak.android.squadgoals.ExerciseFragment"
     android:layout_gravity="center"
     android:layout_marginTop="16dp"
     android:layout_marginBottom="0dp"

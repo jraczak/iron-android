@@ -1,4 +1,4 @@
-package com.justinraczak.android.squadgoals.adapters;
+package fitness.iamiron.android.iron.adapters;
 
 import android.content.Context;
 import android.view.View;
@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.justinraczak.android.squadgoals.models.Exercise;
+import fitness.iamiron.android.iron.models.Exercise;
 
 import io.realm.RealmResults;
 

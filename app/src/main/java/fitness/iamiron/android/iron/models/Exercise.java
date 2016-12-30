@@ -1,4 +1,4 @@
-package com.justinraczak.android.squadgoals.models;
+package fitness.iamiron.android.iron.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

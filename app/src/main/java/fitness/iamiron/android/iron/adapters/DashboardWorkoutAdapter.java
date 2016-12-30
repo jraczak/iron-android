@@ -1,4 +1,4 @@
-package com.justinraczak.android.squadgoals.adapters;
+package fitness.iamiron.android.iron.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -11,9 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.justinraczak.android.squadgoals.DashboardActivity;
-import com.justinraczak.android.squadgoals.R;
-import com.justinraczak.android.squadgoals.models.Workout;
+import fitness.iamiron.android.iron.DashboardActivity;
+import fitness.iamiron.android.iron.R;
+import fitness.iamiron.android.iron.models.Workout;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
