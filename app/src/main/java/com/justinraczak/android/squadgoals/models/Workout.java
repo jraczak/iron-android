@@ -28,13 +28,17 @@ public class Workout extends RealmObject implements Parcelable {
     public RealmList<Set> sets;
     public RealmList<Exercise> exercises;
     private Date date;
+    private Date startTime;
+    private Date finishTime;
 
-    public Workout(String name, RealmList<Set> sets, Date date) {
+    public Workout(String name, RealmList<Set> sets, Date date, Date startTime, Date finishTime) {
         this.realmId = getNewAutoIncrementId();
         this.name = name;
         this.date = date;
         this.sets = sets;
         this.exercises = new RealmList<>();
+        this.startTime = startTime;
+        this.finishTime = finishTime;
     }
 
     public Workout() {
@@ -118,6 +122,22 @@ public class Workout extends RealmObject implements Parcelable {
         this.sets = sets;
     }
 
+    public Date getFinishTime() {
+        return finishTime;
+    }
+
+    public void setFinishTime(Date finishTime) {
+        this.finishTime = finishTime;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
     public void addSet(Set set) {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
@@ -128,6 +148,10 @@ public class Workout extends RealmObject implements Parcelable {
 
     public RealmList<Exercise> getExercises() {
         return exercises;
+    }
+
+    public void setExercises(RealmList<Exercise> exercises) {
+        this.exercises = exercises;
     }
 
     //TODO: Create a bulk add feature
