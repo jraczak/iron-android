@@ -245,7 +245,7 @@ SetFragment.OnFragmentInteractionListener {
                     }
                 });
                 clearDeleteButton.setText("CLEAR");
-                clearDeleteButton.setBackgroundColor(getResources().getColor(R.color.button_secondary));
+                clearDeleteButton.setBackgroundColor(getResources().getColor(R.color.primary_light));
                 clearDeleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

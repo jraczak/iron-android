@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:layout_margin="24dp"
-    android:background="@color/primary_dark"
     tools:context="com.justinraczak.android.squadgoals.EditSetsFragment"
     android:orientation="vertical">
 
@@ -25,7 +24,8 @@
         android:paddingBottom="0dp"
         android:maxLines="1"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Display4"
-        android:textSize="84sp"
+        android:textSize="32sp"
+        android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="@color/primary_text"
         tools:text="100"
@@ -55,7 +55,8 @@
         android:maxLines="1"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Display4"
         android:textAlignment="center"
-        android:textSize="84sp"
+        android:textSize="32sp"
+        android:textStyle="bold"
         android:textColor="@color/primary_text"
         tools:text="100"
         />
