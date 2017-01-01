@@ -61,6 +61,7 @@ public class DashboardWorkoutAdapter extends BaseAdapter {
         TextView workoutNameTextView;
         TextView setCountTextView;
         TextView exerciseCountTextView;
+        TextView totalLoadTextView;
         Button deleteWorkoutButton;
 
         final Workout workout = (Workout) this.getItem(position);
@@ -82,10 +83,12 @@ public class DashboardWorkoutAdapter extends BaseAdapter {
         workoutNameTextView.setText(workout.getName());
         setCountTextView = (TextView) cardView.findViewById(R.id.workout_card_set_count);
         //TODO: Abide the rules and don't use string concatenation here
-        setCountTextView.setText(String.valueOf(workout.getSets().size()) + " sets");
+        setCountTextView.setText(String.valueOf(workout.getSets().size()));
         Log.d(LOG_TAG, "Workout has " + String.valueOf(workout.getSets() + " sets"));
         exerciseCountTextView = (TextView) cardView.findViewById(R.id.workout_card_exercise_count);
-        exerciseCountTextView.setText(String.valueOf(workout.getExercises().size()) + " exercises");
+        exerciseCountTextView.setText(String.valueOf(workout.getExercises().size()));
+        totalLoadTextView = (TextView) cardView.findViewById(R.id.workout_card_total_load);
+        totalLoadTextView.setText(String.valueOf(workout.getTotalLoad()) + " lbs");
         deleteWorkoutButton = (Button) cardView.findViewById(R.id.button_delete_workout);
         deleteWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override

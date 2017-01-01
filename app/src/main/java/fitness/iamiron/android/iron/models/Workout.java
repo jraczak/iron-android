@@ -186,6 +186,17 @@ public class Workout extends RealmObject implements Parcelable {
         return results;
     }
 
+    public float getTotalLoad() {
+        float totalLoad = 0;
+        RealmList<Set> sets = this.sets;
+        for (Set set : sets) {
+            totalLoad = totalLoad + set.getWeight();
+        }
+        Log.d(LOG_TAG, "Total load for workout " + this.getName() + " was " + totalLoad);
+
+        return totalLoad;
+    }
+
     public static Integer getNewAutoIncrementId() {
         Realm realm = Realm.getDefaultInstance();
         //Integer oldMaxId = (Integer) realm.where(Workout.class).max("realmId").intValue();

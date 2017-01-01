@@ -124,5 +124,8 @@
 
     <!-- LABELS & WORDS -->
     <string name="sets_label">sets</string>
+    <string name="reps_label">reps</string>
+    <string name="exercises_label">exercises</string>
+    <string name="total_load_label">total load</string>
 
 </resources>
