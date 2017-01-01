@@ -11,13 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.UUID;
 
 import fitness.iamiron.android.iron.models.Exercise;
 import fitness.iamiron.android.iron.models.Set;
 import fitness.iamiron.android.iron.models.Workout;
-
-import java.util.UUID;
-
 import io.realm.RealmResults;
 
 
@@ -39,6 +39,7 @@ public class EditSetsFragment extends Fragment {
     // Text fields and controls for the logger
     public EditText mRepsEditText;
     public EditText mWeightEditText;
+    public TextView mExerciseNameTextView;
     public Button mSaveButton;
     public Button mClearButton;
 
@@ -91,6 +92,8 @@ public class EditSetsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_edit_sets, container, false);
         mSaveButton = (Button) view.findViewById(R.id.button_save_set);
         mClearButton = (Button) view.findViewById(R.id.button_clear_edittext_values);
+        mExerciseNameTextView = (TextView) view.findViewById(R.id.edit_sets_exercise_name);
+        mExerciseNameTextView.setText(mExercise.getName());
         mRepsEditText = (EditText) view.findViewById(R.id.edit_text_reps);
         mRepsEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
         mWeightEditText = (EditText) view.findViewById(R.id.edit_text_weight);

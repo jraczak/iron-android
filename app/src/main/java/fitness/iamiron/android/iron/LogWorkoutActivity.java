@@ -92,7 +92,6 @@ SetFragment.OnFragmentInteractionListener {
     }
 
     public void onExerciseSelected(int position, String name) {
-        Toast.makeText(this, "Added " + name + " to workout", Toast.LENGTH_SHORT).show();
 
         mRealm = Realm.getDefaultInstance();
         Exercise exercise = mRealm.where(Exercise.class).equalTo("name", name).findAll().first();
@@ -100,17 +99,28 @@ SetFragment.OnFragmentInteractionListener {
         getFragmentManager().beginTransaction()
                 .remove(getFragmentManager().findFragmentByTag("SELECT_EXERCISE_FRAGMENT"))
                 .commit();
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(exercise, mWorkout.getSetCountForExercise(exercise));
-        Log.d("LogWorkoutActivity", String.valueOf(R.id.content_log_workout));
 
-        fragmentTransaction.add(R.id.exercise_fragment_container, exerciseFragment, name + "_fragment");
-        //fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        Log.d(LOG_TAG, "Checking if selected exercise is already in workout");
+        Exercise existingExercise = mWorkout.getExercises().where().equalTo("id", exercise.getId()).findAll().first();
+        Log.d(LOG_TAG, "Search returned " + existingExercise.getName());
+        if (existingExercise.getId() != exercise.getId()) {
 
-        //Add the exercise to the workout
-        mWorkout.addExercise(exercise);
-        mRealm.close();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(exercise, mWorkout.getSetCountForExercise(exercise));
+            Log.d("LogWorkoutActivity", String.valueOf(R.id.content_log_workout));
+
+            fragmentTransaction.add(R.id.exercise_fragment_container, exerciseFragment, name + "_fragment");
+            //fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
+            //Add the exercise to the workout
+            mWorkout.addExercise(exercise);
+            Toast.makeText(this, "Added " + name + " to workout", Toast.LENGTH_SHORT).show();
+            mRealm.close();
+        } else {
+            Toast.makeText(this, exercise.getName() + " is already in this workout", Toast.LENGTH_LONG).show();
+        }
+
     }
 
 
