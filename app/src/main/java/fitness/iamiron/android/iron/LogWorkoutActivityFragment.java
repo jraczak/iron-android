@@ -3,6 +3,7 @@ package fitness.iamiron.android.iron;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,13 @@ public class LogWorkoutActivityFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mWorkout = ((LogWorkoutActivity)getActivity()).getWorkout();
+
+        if (savedInstanceState != null) {
+            Log.d(LOG_TAG, "Fragment was stored in a bundle. Fetching the workout from the saved bundle");
+            mWorkout = savedInstanceState.getParcelable("mWorkout");
+        } else {
+            mWorkout = ((LogWorkoutActivity)getActivity()).getWorkout();
+        }
 
         //mRealm = Realm.getDefaultInstance();
 //
@@ -94,4 +101,11 @@ public class LogWorkoutActivityFragment extends Fragment {
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        Log.d(LOG_TAG, "Storing the workout into a bundle");
+        outState.putParcelable("mWorkout", mWorkout);
+        super.onSaveInstanceState(outState);
+    }
 }

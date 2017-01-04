@@ -25,12 +25,12 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import fitness.iamiron.android.iron.adapters.DashboardWorkoutAdapter;
-import fitness.iamiron.android.iron.models.Exercise;
-import fitness.iamiron.android.iron.models.Workout;
 
 import java.util.Date;
 
+import fitness.iamiron.android.iron.adapters.DashboardWorkoutAdapter;
+import fitness.iamiron.android.iron.models.Exercise;
+import fitness.iamiron.android.iron.models.Workout;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -45,6 +45,7 @@ public class DashboardActivity extends AppCompatActivity
     private ActionBarDrawerToggle mToggle;
     private DashboardWorkoutAdapter mWorkoutAdapter;
     private RealmResults<Workout> mWorkoutRealmResults;
+    private ListView mWorkoutListView;
     public Realm mRealm;
 
     @Override
@@ -104,12 +105,12 @@ public class DashboardActivity extends AppCompatActivity
         //TODO: Grab the workout listview and set the adapter on it
         mWorkoutAdapter = new DashboardWorkoutAdapter(this, mWorkoutRealmResults.size(),
                 mWorkoutRealmResults);
-        final ListView workoutListView = (ListView) findViewById(R.id.dashboard_list_workouts_listview);
-        workoutListView.setAdapter(mWorkoutAdapter);
+        mWorkoutListView = (ListView) findViewById(R.id.dashboard_list_workouts_listview);
+        mWorkoutListView.setAdapter(mWorkoutAdapter);
 
 
         Log.d(TAG, "About to set click listener on workout card listview");
-        workoutListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mWorkoutListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO: Change this to load the selected workout in log mode
@@ -126,7 +127,7 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
 
-        setListViewHeightBasedOnItems(workoutListView);
+        setListViewHeightBasedOnItems(mWorkoutListView);
 
         mRealm.close();
     }
@@ -283,9 +284,16 @@ public class DashboardActivity extends AppCompatActivity
         Log.d(TAG, "There were " + mWorkoutRealmResults.size() + " workouts found during activity restart.");
 
         mWorkoutAdapter = new DashboardWorkoutAdapter(this, mWorkoutRealmResults.size(), mWorkoutRealmResults);
-        ListView listView = (ListView) findViewById(R.id.dashboard_list_workouts_listview);
-        listView.setAdapter(mWorkoutAdapter);
-        setListViewHeightBasedOnItems(listView);
+        mWorkoutListView = (ListView) findViewById(R.id.dashboard_list_workouts_listview);
+        mWorkoutListView.setAdapter(mWorkoutAdapter);
+        setListViewHeightBasedOnItems(mWorkoutListView);
         mRealm.close();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.put
     }
 }

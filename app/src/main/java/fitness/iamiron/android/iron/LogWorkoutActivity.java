@@ -37,29 +37,35 @@ SetFragment.OnFragmentInteractionListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Create or look up the workout to load into the logging screen
-        //TODO: Check if a workout already exists for this date before creating a new one
+
         mRealm = Realm.getDefaultInstance();
 
-        //TODO: Check if there is a workout passed in before creating a new one
-        if (getIntent().getIntExtra("workoutId", 0) == 0) {
-            //mWorkout = new Workout(new Date().toString(), null, new Date());
-            //Log.d(LOG_TAG, "fragment's workout is: " + this.mWorkout);
-            //Log.d(LOG_TAG, "workout realm id is " + mWorkout.getRealmId());
-            mRealm.beginTransaction();
-            //mRealm.copyToRealm(mWorkout);
-            mWorkout = mRealm.createObject(Workout.class, Workout.getNewAutoIncrementId());
-            mWorkout.setDate(new Date());
-            mWorkout.setSets(null);
-            mWorkout.setName(new Date().toString());
-            mRealm.commitTransaction();
-            Log.d(LOG_TAG, "Created and saved workout " + mWorkout.getName() + " to realm with realm id " + mWorkout.getRealmId());
+        // Check if this activity instance was stored in a bundle previously
+        if (savedInstanceState != null) {
+            Log.d(LOG_TAG, "Trying to get workout from saved bundle.");
+            Log.d(LOG_TAG, "Found this in bundle: " + savedInstanceState.getParcelable("mWorkout"));
+            mWorkout = savedInstanceState.getParcelable("mWorkout");
         } else {
-            RealmResults<Workout> workoutRealmResults = mRealm.where(Workout.class)
-                    .equalTo("realmId", getIntent().getIntExtra("workoutId", 0))
-                    .findAll();
-            Log.d(LOG_TAG, workoutRealmResults.size() + " workouts found by searching for realm id " + getIntent().getIntExtra("workoutId", 0));
-            mWorkout = workoutRealmResults.first();
+            // Create or look up the workout to load into the logging screen
+            if (getIntent().getIntExtra("workoutId", 0) == 0) {
+                //mWorkout = new Workout(new Date().toString(), null, new Date());
+                //Log.d(LOG_TAG, "fragment's workout is: " + this.mWorkout);
+                //Log.d(LOG_TAG, "workout realm id is " + mWorkout.getRealmId());
+                mRealm.beginTransaction();
+                //mRealm.copyToRealm(mWorkout);
+                mWorkout = mRealm.createObject(Workout.class, Workout.getNewAutoIncrementId());
+                mWorkout.setDate(new Date());
+                mWorkout.setSets(null);
+                mWorkout.setName(new Date().toString());
+                mRealm.commitTransaction();
+                Log.d(LOG_TAG, "Created and saved workout " + mWorkout.getName() + " to realm with realm id " + mWorkout.getRealmId());
+            } else {
+                RealmResults<Workout> workoutRealmResults = mRealm.where(Workout.class)
+                        .equalTo("realmId", getIntent().getIntExtra("workoutId", 0))
+                        .findAll();
+                Log.d(LOG_TAG, workoutRealmResults.size() + " workouts found by searching for realm id " + getIntent().getIntExtra("workoutId", 0));
+                mWorkout = workoutRealmResults.first();
+            }
         }
 
         //setContentView(R.layout.activity_log_workout);
@@ -289,5 +295,19 @@ SetFragment.OnFragmentInteractionListener {
 
     public Workout getWorkout() {
         return mWorkout;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        // Make sure the workout reference isn't lost, for example during rotation
+        Log.d(LOG_TAG, "Saving workout " + mWorkout + " to bundle");
+        outState.putParcelable("mWorkout", mWorkout);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }
