@@ -284,16 +284,11 @@ public class DashboardActivity extends AppCompatActivity
         Log.d(TAG, "There were " + mWorkoutRealmResults.size() + " workouts found during activity restart.");
 
         mWorkoutAdapter = new DashboardWorkoutAdapter(this, mWorkoutRealmResults.size(), mWorkoutRealmResults);
-        mWorkoutListView = (ListView) findViewById(R.id.dashboard_list_workouts_listview);
+        Log.d(TAG, "Trying to set adapater on listview " + mWorkoutListView);
+        //mWorkoutListView = (ListView) findViewById(R.id.dashboard_list_workouts_listview);
         mWorkoutListView.setAdapter(mWorkoutAdapter);
         setListViewHeightBasedOnItems(mWorkoutListView);
         mRealm.close();
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.put
-    }
 }

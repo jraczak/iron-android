@@ -306,8 +306,8 @@ SetFragment.OnFragmentInteractionListener {
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
+    //@Override
+    //public void onResume() {
+    //    super.onResume();
+    //}
 }
