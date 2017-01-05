@@ -16,65 +16,116 @@
         tools:text="Incline Dumbbell Chest Press"/>
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/container_edit_sets_weight_line_linear_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="24dp">
-        <EditText
-        android:id="@+id/edit_text_weight"
-        android:inputType="number"
-        android:digits="0123456789"
-        android:background="@android:color/transparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="48dp"
-        android:paddingBottom="0dp"
-        android:maxLines="1"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Display4"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:textColor="@color/primary_text"
-        tools:text="100"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Weight"
-        android:textSize="14sp"
-        android:textColor="@color/secondary_text"/>
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/button_weight_decrement"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="36dp"
+            android:layout_marginEnd="36dp"
+            android:layout_height="wrap_content"
+            android:text="-"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+            <EditText
+                android:id="@+id/edit_text_weight"
+                android:inputType="number"
+                android:digits="0123456789"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:paddingBottom="0dp"
+                android:maxLines="1"
+                android:maxLength="4"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Display4"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textColor="@color/primary_text"
+                tools:text="100"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weight"
+                android:textSize="14sp"
+                android:textColor="@color/secondary_text"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/button_weight_increment"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginEnd="36dp"
+            android:text="+"
+            />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/container_edit_sets_reps_line_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="24dp">
+        <Button
+            android:id="@+id/button_reps_decrement"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginEnd="36dp"
+            android:text="-"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="24dp">
-    <EditText
-        android:id="@+id/edit_text_reps"
-        android:inputType="number"
-        android:digits="0123456789"
-        android:background="@android:color/transparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="48dp"
-        android:maxLines="1"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Display4"
-        android:textAlignment="center"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textColor="@color/primary_text"
-        tools:text="100"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reps"
-        android:textSize="14sp"
-        android:textColor="@color/secondary_text"/>
+        android:gravity="center_horizontal">
+        <EditText
+            android:id="@+id/edit_text_reps"
+            android:inputType="number"
+            android:digits="0123456789"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="48dp"
+            android:maxLines="1"
+            android:maxLength="4"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display4"
+            android:textAlignment="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_text"
+            tools:text="100"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reps"
+            android:textSize="14sp"
+            android:textColor="@color/secondary_text"/>
     </LinearLayout>
+        <Button
+            android:id="@+id/button_reps_increment"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginEnd="36dp"
+            android:text="+"/>
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -82,17 +133,17 @@
         android:orientation="horizontal"
         android:layout_marginTop="36dp"
         android:gravity="center_vertical">
-    <Button
-        android:id="@+id/button_save_set"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:text="Save"
-        android:background="@color/button_primary"
-        android:textColor="@android:color/white"/>
+        <Button
+            android:id="@+id/button_save_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:text="Save"
+            android:background="@color/button_primary"
+            android:textColor="@android:color/white"/>
         <Button
             android:id="@+id/button_clear_edittext_values"
             android:layout_width="wrap_content"
@@ -110,6 +161,7 @@
         android:id="@+id/container_saved_sets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical"
+        android:gravity="center_horizontal"></LinearLayout>
 
 </LinearLayout>

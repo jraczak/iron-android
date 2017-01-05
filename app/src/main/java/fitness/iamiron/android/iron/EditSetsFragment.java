@@ -42,6 +42,10 @@ public class EditSetsFragment extends Fragment {
     public TextView mExerciseNameTextView;
     public Button mSaveButton;
     public Button mClearButton;
+    public Button mIncrementWeightButton;
+    public Button mDecrementWeightButton;
+    public Button mIncrementRepsButton;
+    public Button mDecrementRepsButton;
 
     // TODO: Rename and change types of parameters
     private Exercise mExercise;
@@ -96,8 +100,10 @@ public class EditSetsFragment extends Fragment {
         mExerciseNameTextView.setText(mExercise.getName());
         mRepsEditText = (EditText) view.findViewById(R.id.edit_text_reps);
         mRepsEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mRepsEditText.setText("0");
         mWeightEditText = (EditText) view.findViewById(R.id.edit_text_weight);
         mWeightEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mWeightEditText.setText("0");
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +130,36 @@ public class EditSetsFragment extends Fragment {
         }
 
         mWeightEditText.requestFocus();
+
+        mIncrementWeightButton = (Button) view.findViewById(R.id.button_weight_increment);
+        Log.d(LOG_TAG, "Increment weight button is " + mIncrementWeightButton);
+        mDecrementWeightButton = (Button) view.findViewById(R.id.button_weight_decrement);
+        mIncrementRepsButton = (Button) view.findViewById(R.id.button_reps_increment);
+        mDecrementRepsButton = (Button) view.findViewById(R.id.button_reps_decrement);
+        mIncrementWeightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                incrementWeight();
+            }
+        });
+        mDecrementWeightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                decrementWeight();
+            }
+        });
+        mIncrementRepsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                incrementReps();
+            }
+        });
+        mDecrementRepsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                decrementReps();
+            }
+        });
 
         return view;
     }
@@ -183,6 +219,45 @@ public class EditSetsFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+    }
+
+    //TODO: Write automated tests for all the buttons
+    public void incrementWeight() {
+        int currentWeight = Integer.parseInt(String.valueOf(mWeightEditText.getText()));
+        //TODO: Handle the null, 0, and negative value exceptions
+        int newWeight = currentWeight + 5;
+        mWeightEditText.setText(Integer.toString(newWeight));
+    }
+
+    public void decrementWeight() {
+        int newWeight;
+        int currentWeight = Integer.parseInt(String.valueOf(mWeightEditText.getText()));
+        //TODO: Handle the null, 0, and negative value exceptions
+        if (currentWeight >= 5) {
+            newWeight = currentWeight - 5;
+        } else {
+            newWeight = 0;
+        }
+        mWeightEditText.setText(Integer.toString(newWeight));
+    }
+
+    public void incrementReps() {
+        int currentReps = Integer.parseInt(String.valueOf(mRepsEditText.getText()));
+        //TODO: Handle the null, 0, and negative value exceptions
+        int newReps =  currentReps + 1;
+        mRepsEditText.setText(Integer.toString(newReps));
+    }
+
+    public void decrementReps() {
+        int newReps;
+        int currentReps = Integer.parseInt(String.valueOf(mRepsEditText.getText()));
+        //TODO: Handle the null, 0, and negative value exceptions
+        if (currentReps >= 1) {
+            newReps =  currentReps - 1;
+        } else {
+            newReps = 0;
+        }
+        mRepsEditText.setText(Integer.toString(newReps));
     }
 
     @Override
