@@ -50,7 +50,7 @@ public class BasicTest {
     public ReportHelper reportHelper = Factory.getReportHelper();
 
     @Test
-    public void sampleTest() {
+    public void testCheckAppTitle() {
 
         reportHelper.label("Given I accept contacts permissions");
         allowPermissionsIfNeeded();
@@ -82,7 +82,7 @@ public class BasicTest {
     }
 
     @Test
-    public void sampleEmailLoginTest() {
+    public void testEmailLogin() {
         reportHelper.label("Given I accept contacts permissions");
         allowPermissionsIfNeeded();
 
