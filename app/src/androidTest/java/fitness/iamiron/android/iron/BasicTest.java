@@ -57,7 +57,7 @@ public class BasicTest {
 
         reportHelper.label("Then I should see the app name");
         ViewInteraction textView = onView(
-                allOf(withText("Squad Goals"),
+                allOf(withText("Iron"),
                         childAtPosition(
                                 allOf(withId(R.id.action_bar),
                                         childAtPosition(
@@ -65,7 +65,7 @@ public class BasicTest {
                                                 0)),
                                 0),
                         isDisplayed()));
-        textView.check(matches(withText("Squad Goals")));
+        textView.check(matches(withText("Iron")));
 
         reportHelper.label("And I should see the email sign in button");
         ViewInteraction button = onView(
