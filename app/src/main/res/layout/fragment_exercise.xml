@@ -9,7 +9,6 @@
     android:layout_gravity="center"
     android:layout_marginTop="16dp"
     android:layout_marginBottom="0dp"
-    card_view:cardBackgroundColor="@color/primary_light"
     card_view:contentPaddingLeft="16dp"
     card_view:contentPaddingTop="24dp"
     card_view:contentPaddingRight="16dp"

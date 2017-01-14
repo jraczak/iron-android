@@ -31,7 +31,6 @@ public class Iron extends Application {
         RealmConfiguration defaultConfig = new RealmConfiguration.Builder()
                 .name("squad_goals.realm")
                 .schemaVersion(1)
-                .deleteRealmIfMigrationNeeded()
                 .build();
 
         Realm.setDefaultConfiguration(defaultConfig);

@@ -1,47 +1,131 @@
 {
-  "exercises": [
-    {
-      "id": 1,
-      "name": "Barbell Chest Press",
-      "primaryMuscle": "chest",
-      "secondaryMuscle": "triceps",
-      "equipment": "barbell"
-    },
-    {
-      "id": 2,
-      "name": "Dumbbell Chest Press",
-      "primaryMuscle": "chest",
-      "secondaryMuscle": "triceps",
-      "equipment": "dumbbells"
-    },
-    {
-      "id": 3,
-      "name": "Incline Barbell Chest Press",
-      "primaryMuscle": "chest",
-      "secondaryMuscle": "triceps",
-      "equipment": "barbell"
-    },
-    {
-      "id": 4,
-      "name": "Decline Barbell Chest Press",
-      "primaryMuscle": "chest",
-      "secondaryMuscle": "triceps",
-      "equipment": "barbell"
-    },
-    {
-      "id": 5,
-      "name": "Incline Dumbbell Chest Press",
-      "primaryMuscle": "chest",
-      "secondaryMuscle": "triceps",
-      "equipment": "dumbbells"
-    },
-    {
-      "id": 6,
-      "name": "Decline Dumbbell Chest Press",
-      "primaryMuscle": "chest",
-      "secondaryMuscle": "triceps",
-      "equipment": "dumbbells"
-    }
-  ]
-}
+   "exercises":
+[
+ {
+   "id": 1,
+   "name": "Barbell Chest Press",
+   "primaryMuscle": "chest",
+   "secondaryMuscle": "triceps",
+   "equipment": "barbell"
+ },
+ {
+   "id": 2,
+   "name": "Dumbbell Chest Press",
+   "primaryMuscle": "chest",
+   "secondaryMuscle": "triceps",
+   "equipment": "dumbbells"
+ },
+ {
+   "id": 3,
+   "name": "Incline Barbell Chest Press",
+   "primaryMuscle": "chest",
+   "secondaryMuscle": "triceps",
+   "equipment": "barbell"
+ },
+ {
+   "id": 4,
+   "name": "Decline Barbell Chest Press",
+   "primaryMuscle": "chest",
+   "secondaryMuscle": "triceps",
+   "equipment": "barbell"
+ },
+ {
+   "id": 5,
+   "name": "Incline Dumbbell Chest Press",
+   "primaryMuscle": "chest",
+   "secondaryMuscle": "triceps",
+   "equipment": "dumbbells"
+ },
+ {
+   "id": 6,
+   "name": "Decline Dumbbell Chest Press",
+   "primaryMuscle": "chest",
+   "secondaryMuscle": "triceps",
+   "equipment": "dumbbells"
+ },
+ {
+   "id": 7,
+   "name": "Barbell Row",
+   "primaryMuscle": "lats",
+   "secondaryMuscle": "biceps",
+   "equipment": ""
+ },
+ {
+   "id": 8,
+   "name": "Barbell Shrug",
+   "primaryMuscle": "shoulders",
+   "secondaryMuscle": "",
+   "equipment": ""
+ },
+ {
+   "id": 9,
+   "name": "Chin Up",
+   "primaryMuscle": "lats",
+   "secondaryMuscle": "biceps",
+   "equipment": ""
+ },
+ {
+   "id": 10,
+   "name": "Deadlift",
+   "primaryMuscle": "lats",
+   "secondaryMuscle": "biceps",
+   "equipment": ""
+ },
+ {
+   "id": 11,
+   "name": "Dumbbell Row",
+   "primaryMuscle": "lats",
+   "secondaryMuscle": "biceps",
+   "equipment": ""
+ },
+ {
+   "id": 12,
+   "name": "Hammer Strength Row",
+   "primaryMuscle": "lats",
+   "secondaryMuscle": "biceps",
+   "equipment": ""
+ },
+ {
+   "id": 13,
+   "name": "Lat Pulldown",
+   "primaryMuscle": "lats",
+   "secondaryMuscle": "biceps",
+   "equipment": ""
+ },
+ {
+   "id": 14,
+   "name": "Machine Shrug",
+   "primaryMuscle": "shoulders",
+   "secondaryMuscle": "",
+   "equipment": ""
+ },
+ {
+   "id": 15,
+   "name": "Pull Up",
+   "primaryMuscle": "lats",
+   "secondaryMuscle": "biceps",
+   "equipment": ""
+ },
+ {
+   "id": 16,
+   "name": "Seated Cable Row",
+   "primaryMuscle": "lats",
+   "secondaryMuscle": "biceps",
+   "equipment": ""
+ },
+ {
+   "id": 17,
+   "name": "Straight Arm Cable Pushdown",
+   "primaryMuscle": "lats",
+   "secondaryMuscle": "",
+   "equipment": ""
+ },
+ {
+   "id": 18,
+   "name": "T-Bar Row",
+   "primaryMuscle": "lats",
+   "secondaryMuscle": "biceps",
+   "equipment": ""
+ }
+]
 }
