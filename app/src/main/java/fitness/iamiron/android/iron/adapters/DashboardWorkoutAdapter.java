@@ -14,7 +14,6 @@ import android.widget.Toast;
 import fitness.iamiron.android.iron.DashboardActivity;
 import fitness.iamiron.android.iron.R;
 import fitness.iamiron.android.iron.models.Workout;
-
 import io.realm.Realm;
 import io.realm.RealmResults;
 

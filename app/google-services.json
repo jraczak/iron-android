@@ -67,6 +67,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "318434523333-vnc8n6uh8ltj223gojtom88srtk2e06m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fitness.iamiron.android.iron",
+            "certificate_hash": "EC765F4EA7166C21B12DFBCC3DD373F7332EE842"
+          }
+        },
+        {
+          "client_id": "318434523333-fae2j3scd3j69qf5h3to0kuohsbg8b0p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fitness.iamiron.android.iron",
+            "certificate_hash": "05B031779931E686BF3B03A73841227DA43F6181"
+          }
+        },
+        {
+          "client_id": "318434523333-ilm6lgbd0tnj7hnsrk6ot31qas4j96sd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fitness.iamiron.android.iron",
+            "certificate_hash": "1312F923906350A7D79B7A53616620329B33041E"
+          }
+        },
+        {
           "client_id": "318434523333-ocq11reu7th2uh8le4fqac1gjlt315qv.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -81,8 +105,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318434523333-ocq11reu7th2uh8le4fqac1gjlt315qv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

@@ -157,11 +157,15 @@
             android:textColor="@android:color/white"/>
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/container_saved_sets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"></LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -291,4 +291,21 @@ public class DashboardActivity extends AppCompatActivity
         mRealm.close();
     }
 
+    // TODO: Figure out how to get this dialog working
+    //public static class ConfirmDeleteWorkoutDialog extends DialogFragment {
+    //    @Override
+    //    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    //        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+//
+    //        dialogBuilder.setMessage(R.string.dialog_confirm_delete_workout);
+    //        dialogBuilder.setPositiveButton(R.string.dialog_confirm_delete_workout,
+    //                new DialogInterface.OnClickListener() {
+    //                    @Override
+    //                    public void onClick(DialogInterface dialog, int which) {
+    //
+    //                    }
+    //                })
+    //    }
+    //}
+
 }

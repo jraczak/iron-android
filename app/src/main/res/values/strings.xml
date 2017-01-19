@@ -128,4 +128,9 @@
     <string name="exercises_label">exercises</string>
     <string name="total_load_label">total load</string>
 
+    <!-- DIALOGS -->
+    <string name="dialog_confirm_delete_workout">Are you sure you want to delete this workout? You cannot recover it.</string>
+    <string name="dialog_delete_workout">Delete workout</string>
+    <string name="dialog_cancel">Cancel</string>
+
 </resources>
