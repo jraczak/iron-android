@@ -101,6 +101,7 @@ public class LogWorkoutActivityFragment extends Fragment {
         Log.d(LOG_TAG, "SelectExerciseFragment is " + selectExerciseFragment);
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_log_workout, selectExerciseFragment, "SELECT_EXERCISE_FRAGMENT")
+                .addToBackStack("show_select_exercise_fragment")
                 .commit();
     }
 
