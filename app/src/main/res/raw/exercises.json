@@ -1,254 +1,418 @@
+{
+   "exercises":
 [
  {
    "id": 1,
    "name": "Barbell Chest Press",
-   "primaryMuscle": "chest",
-   "secondaryMuscle": "triceps",
+   "primaryMuscles": "chest",
+   "secondaryMuscles": "triceps",
    "equipment": "barbell"
  },
  {
    "id": 2,
    "name": "Dumbbell Chest Press",
-   "primaryMuscle": "chest",
-   "secondaryMuscle": "triceps",
+   "primaryMuscles": "chest",
+   "secondaryMuscles": "triceps",
    "equipment": "dumbbells"
  },
  {
    "id": 3,
    "name": "Incline Barbell Chest Press",
-   "primaryMuscle": "chest",
-   "secondaryMuscle": "triceps",
+   "primaryMuscles": "chest",
+   "secondaryMuscles": "triceps",
    "equipment": "barbell"
  },
  {
    "id": 4,
    "name": "Decline Barbell Chest Press",
-   "primaryMuscle": "chest",
-   "secondaryMuscle": "triceps",
+   "primaryMuscles": "chest",
+   "secondaryMuscles": "triceps",
    "equipment": "barbell"
  },
  {
    "id": 5,
    "name": "Incline Dumbbell Chest Press",
-   "primaryMuscle": "chest",
-   "secondaryMuscle": "triceps",
+   "primaryMuscles": "chest",
+   "secondaryMuscles": "triceps",
    "equipment": "dumbbells"
  },
  {
    "id": 6,
    "name": "Decline Dumbbell Chest Press",
-   "primaryMuscle": "chest",
-   "secondaryMuscle": "triceps",
+   "primaryMuscles": "chest",
+   "secondaryMuscles": "triceps",
    "equipment": "dumbbells"
  },
  {
    "id": 7,
    "name": "Barbell Row",
-   "primaryMuscle": "back",
-   "secondaryMuscle": "biceps",
+   "primaryMuscles": "back",
+   "secondaryMuscles": "biceps",
    "equipment": ""
  },
  {
    "id": 8,
    "name": "Barbell Shrug",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 9,
    "name": "Chin Up",
-   "primaryMuscle": "back",
-   "secondaryMuscle": "biceps",
+   "primaryMuscles": "back",
+   "secondaryMuscles": "biceps",
    "equipment": ""
  },
  {
    "id": 10,
    "name": "Deadlift",
-   "primaryMuscle": "back",
-   "secondaryMuscle": "biceps",
+   "primaryMuscles": "back",
+   "secondaryMuscles": "biceps",
    "equipment": ""
  },
  {
    "id": 11,
    "name": "Dumbbell Row",
-   "primaryMuscle": "back",
-   "secondaryMuscle": "biceps",
+   "primaryMuscles": "back",
+   "secondaryMuscles": "biceps",
    "equipment": ""
  },
  {
    "id": 12,
    "name": "Hammer Strength Row",
-   "primaryMuscle": "back",
-   "secondaryMuscle": "biceps",
+   "primaryMuscles": "back",
+   "secondaryMuscles": "biceps",
    "equipment": ""
  },
  {
    "id": 13,
    "name": "Lat Pulldown",
-   "primaryMuscle": "back",
-   "secondaryMuscle": "biceps",
+   "primaryMuscles": "back",
+   "secondaryMuscles": "biceps",
    "equipment": ""
  },
  {
    "id": 14,
    "name": "Machine Shrug",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 15,
    "name": "Pull Up",
-   "primaryMuscle": "back",
-   "secondaryMuscle": "biceps",
+   "primaryMuscles": "back",
+   "secondaryMuscles": "biceps",
    "equipment": ""
  },
  {
    "id": 16,
    "name": "Seated Cable Row",
-   "primaryMuscle": "back",
-   "secondaryMuscle": "biceps",
+   "primaryMuscles": "back",
+   "secondaryMuscles": "biceps",
    "equipment": ""
  },
  {
    "id": 17,
    "name": "Straight Arm Cable Pushdown",
-   "primaryMuscle": "back",
-   "secondaryMuscle": "",
+   "primaryMuscles": "back",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 18,
    "name": "T-Bar Row",
-   "primaryMuscle": "back",
-   "secondaryMuscle": "biceps",
+   "primaryMuscles": "back",
+   "secondaryMuscles": "biceps",
    "equipment": ""
  },
  {
    "id": 19,
    "name": "Seated Dumbbell Press",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 20,
    "name": "Behind Neck Barbell Press",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 21,
    "name": "Cable Face Pull",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 22,
    "name": "Front Unilateral Dumbbell Raise",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 23,
    "name": "Hammer Strength Shoulder Press",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 24,
    "name": "Bilateral Lateral Dumbbell Raise",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 25,
    "name": "Lateral Machine Raise",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 26,
    "name": "Standing Unilateral Dumbbell Press",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 27,
    "name": "Rear Delt Dumbbell Raise",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 28,
    "name": "Seated Dumbbell Lateral Raise",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 29,
    "name": "Smith Machine Overhead Press",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 30,
    "name": "Standing Dumbbell Press",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 31,
    "name": "Unilateral Front Dumbbell Raise",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 32,
    "name": "Cable Overhead Triceps Extension",
-   "primaryMuscle": "triceps",
-   "secondaryMuscle": "",
+   "primaryMuscles": "triceps",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 33,
    "name": "High Cable Fly",
-   "primaryMuscle": "chest",
-   "secondaryMuscle": "",
+   "primaryMuscles": "chest",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 34,
    "name": "Incline Hammer Strength Chest Press",
-   "primaryMuscle": "chest",
-   "secondaryMuscle": "",
+   "primaryMuscles": "chest",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 35,
    "name": "Standing Unilateral Cable Press",
-   "primaryMuscle": "shoulders",
-   "secondaryMuscle": "",
+   "primaryMuscles": "shoulders",
+   "secondaryMuscles": "",
    "equipment": ""
  },
  {
    "id": 36,
    "name": "Reverse Grip Pulldown",
-   "primaryMuscle": "back",
-   "secondaryMuscle": "",
+   "primaryMuscles": "back",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 37,
+   "name": "Barbell Curl",
+   "primaryMuscles": "biceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 38,
+   "name": "Unilateral Cable Curl",
+   "primaryMuscles": "biceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 39,
+   "name": "Rope Curl",
+   "primaryMuscles": "biceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 40,
+   "name": "Cable Bar Curl",
+   "primaryMuscles": "biceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 41,
+   "name": "Dumbbell Concentration Curl",
+   "primaryMuscles": "biceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 42,
+   "name": "Dumbbell Curl",
+   "primaryMuscles": "biceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 43,
+   "name": "Dumbbell Hammer Curl",
+   "primaryMuscles": "biceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 44,
+   "name": "Dumbbell Preacher Curl",
+   "primaryMuscles": "biceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 45,
+   "name": "EZ Bar curl",
+   "primaryMuscles": "biceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 46,
+   "name": "EZ Bar Preacher Curl",
+   "primaryMuscles": "biceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 47,
+   "name": "Seated Incline Dumbbell Curl",
+   "primaryMuscles": "biceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 48,
+   "name": "Seated Machine Curl",
+   "primaryMuscles": "biceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 49,
+   "name": "Close Grip Barbell Bench Press",
+   "primaryMuscles": "triceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 50,
+   "name": "Standing Dumbbell Kickback",
+   "primaryMuscles": "triceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 51,
+   "name": "Dumbbell Overhead Triceps Extension",
+   "primaryMuscles": "triceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 52,
+   "name": "EZ Bar Skullcrusher",
+   "primaryMuscles": "triceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 53,
+   "name": "Lying Triceps Extension",
+   "primaryMuscles": "triceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 54,
+   "name": "Triceps Dip",
+   "primaryMuscles": "triceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 55,
+   "name": "Ring Dip",
+   "primaryMuscles": "triceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 56,
+   "name": "Rope Push Down",
+   "primaryMuscles": "triceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 57,
+   "name": "Unilateral Rope Push Down",
+   "primaryMuscles": "triceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 58,
+   "name": "Smith Machine Close Grip Bench Press",
+   "primaryMuscles": "triceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 59,
+   "name": "Machine Push Down",
+   "primaryMuscles": "triceps",
+   "secondaryMuscles": "",
    "equipment": ""
  }
 ]
+}

@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import fitness.iamiron.android.iron.models.Exercise;
 import fitness.iamiron.android.iron.models.Workout;
-
 import io.realm.Realm;
 
 /**
@@ -67,6 +66,7 @@ public class LogWorkoutActivityFragment extends Fragment {
         addExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(LOG_TAG, "Add exercise button clicked");
                 showSelectExerciseDialog();
             }
         });
@@ -97,8 +97,11 @@ public class LogWorkoutActivityFragment extends Fragment {
         //fragmentTransaction.replace(R.id.fragment, selectExerciseFragment)
         //        .addToBackStack(null).commit();
 
-        selectExerciseFragment.show(fragmentManager, "SELECT_EXERCISE_FRAGMENT");
-
+        //selectExerciseFragment.show(fragmentManager, "SELECT_EXERCISE_FRAGMENT");
+        Log.d(LOG_TAG, "SelectExerciseFragment is " + selectExerciseFragment);
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_log_workout, selectExerciseFragment, "SELECT_EXERCISE_FRAGMENT")
+                .commit();
     }
 
     @Override

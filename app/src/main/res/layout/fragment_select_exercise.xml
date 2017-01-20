@@ -3,14 +3,11 @@
     android:id="@+id/dialog_select_exercise"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="24dp"
     android:orientation="vertical"
     tools:context="com.justinraczak.android.squadgoals.fitness.justinraczak.android.squadgoals.SelectExerciseFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/dialog_select_exercise_header" />
 
     <ListView
         android:id="@+id/list_view_select_exercise"

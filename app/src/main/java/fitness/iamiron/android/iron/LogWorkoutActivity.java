@@ -30,6 +30,7 @@ SetFragment.OnFragmentInteractionListener {
     public Workout mWorkout;
     private Realm mRealm;
     private String mSaveButtonState;
+    private LogWorkoutActivityFragment mLogWorkoutActivityFragment;
     private Set mEditingSet;
     private SetFragment mEditingFragment;
 
@@ -75,9 +76,9 @@ SetFragment.OnFragmentInteractionListener {
         setSupportActionBar(toolbar);
 
         //Add the content fragment
-        LogWorkoutActivityFragment logWorkoutActivityFragment = new LogWorkoutActivityFragment();
+        mLogWorkoutActivityFragment = new LogWorkoutActivityFragment();
         getFragmentManager().beginTransaction()
-                .add(R.id.fragment_container_log_workout, logWorkoutActivityFragment, "LOG_WORKOUT_ACTIVITY_FRAGMENT")
+                .add(R.id.fragment_container_log_workout, mLogWorkoutActivityFragment, "LOG_WORKOUT_ACTIVITY_FRAGMENT")
                 .commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -103,8 +104,12 @@ SetFragment.OnFragmentInteractionListener {
         Exercise exercise = mRealm.where(Exercise.class).equalTo("name", name).findAll().first();
 
         getFragmentManager().beginTransaction()
-                .remove(getFragmentManager().findFragmentByTag("SELECT_EXERCISE_FRAGMENT"))
+                .replace(R.id.fragment_container_log_workout, mLogWorkoutActivityFragment)
                 .commit();
+
+
+                //.remove(getFragmentManager().findFragmentByTag("SELECT_EXERCISE_FRAGMENT"))
+                //.commit();
 
         Log.d(LOG_TAG, "Checking if selected exercise is already in workout " + mWorkout);
         RealmResults<Exercise> existingExerciseResults = mWorkout.getExercises().where().equalTo("id", exercise.getId()).findAll();

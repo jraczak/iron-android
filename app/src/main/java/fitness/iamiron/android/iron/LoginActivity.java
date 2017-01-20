@@ -210,7 +210,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-                        Log.d(TAG, "Returned user is: " + mAuth.getCurrentUser().getEmail());
 
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
@@ -220,6 +219,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         } else {
                             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                             startActivity(intent);
+                            Log.d(TAG, "Returned user email is: " + mAuth.getCurrentUser().getEmail());
                             Log.d(TAG, "User is " + mAuth.getCurrentUser().getDisplayName());
                         }
                     }
