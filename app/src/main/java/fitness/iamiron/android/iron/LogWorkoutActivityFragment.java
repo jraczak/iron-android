@@ -76,11 +76,16 @@ public class LogWorkoutActivityFragment extends Fragment {
 
         FragmentManager fragmentManager = getFragmentManager();
         for (Exercise exercise : mWorkout.exercises) {
-            //TODO: Figure out how to actually count the sets for this exercise from the workout
-            ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(exercise, mWorkout.getSetCountForExercise(exercise));
-            fragmentManager.beginTransaction()
-                    .add(R.id.exercise_fragment_container, exerciseFragment)
-                    .commit();
+            // Make sure no duplicate fragments are created for an exercise
+            if (fragmentManager.findFragmentByTag("EXERCISE_"+exercise.getId()+"_FRAGMENT") == null) {
+                Log.d(LOG_TAG, "No fragment was found for " + exercise.getName() + ", creating new fragment");
+                ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(exercise, mWorkout.getSetCountForExercise(exercise));
+                fragmentManager.beginTransaction()
+                        .add(R.id.exercise_fragment_container, exerciseFragment, "EXERCISE_" + exercise.getId() + "_FRAGMENT")
+                        .commit();
+            } else {
+                Log.d(LOG_TAG, "An existing fragment was found for " + exercise.getName());
+            }
         }
 
         return view;
