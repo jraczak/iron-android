@@ -190,7 +190,7 @@ public class Workout extends RealmObject implements Parcelable {
         float totalLoad = 0;
         RealmList<Set> sets = this.sets;
         for (Set set : sets) {
-            totalLoad = totalLoad + set.getWeight();
+            totalLoad = totalLoad + (set.getWeight() * set.getReps());
         }
         Log.d(LOG_TAG, "Total load for workout " + this.getName() + " was " + totalLoad);
 
