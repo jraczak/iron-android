@@ -100,10 +100,10 @@ public class EditSetsFragment extends Fragment {
         mExerciseNameTextView.setText(mExercise.getName());
         mRepsEditText = (EditText) view.findViewById(R.id.edit_text_reps);
         mRepsEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-        mRepsEditText.setText("0");
+        mRepsEditText.setText("");
         mWeightEditText = (EditText) view.findViewById(R.id.edit_text_weight);
         mWeightEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-        mWeightEditText.setText("0");
+        mWeightEditText.setText("");
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
