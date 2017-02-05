@@ -92,6 +92,7 @@ public class EditSetsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_sets, container, false);
         mSaveButton = (Button) view.findViewById(R.id.button_save_set);
@@ -100,10 +101,10 @@ public class EditSetsFragment extends Fragment {
         mExerciseNameTextView.setText(mExercise.getName());
         mRepsEditText = (EditText) view.findViewById(R.id.edit_text_reps);
         mRepsEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-        mRepsEditText.setText("");
+        mRepsEditText.setText(String.valueOf(mExercise.getMostRecentReps()));
         mWeightEditText = (EditText) view.findViewById(R.id.edit_text_weight);
         mWeightEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-        mWeightEditText.setText("");
+        mWeightEditText.setText(String.valueOf(mExercise.getMostRecentWeight()));
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
