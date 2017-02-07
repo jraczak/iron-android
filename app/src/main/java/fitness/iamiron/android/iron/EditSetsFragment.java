@@ -13,8 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.UUID;
-
 import fitness.iamiron.android.iron.models.Exercise;
 import fitness.iamiron.android.iron.models.Set;
 import fitness.iamiron.android.iron.models.Workout;
@@ -123,10 +121,13 @@ public class EditSetsFragment extends Fragment {
         if (sets.size() > 0) {
             FragmentManager fragmentManager = getFragmentManager();
             for (Set set : sets) {
-                SetFragment setFragment = SetFragment.newInstance(mExercise, mWorkout, set, set.getReps(), set.getWeight());
-                fragmentManager.beginTransaction()
-                        .add(R.id.container_saved_sets, setFragment, UUID.randomUUID().toString())
-                        .commit();
+                if (fragmentManager.findFragmentByTag(set.getRealmId().toString()) == null) {
+                    SetFragment setFragment = SetFragment.newInstance(mExercise, mWorkout, set, set.getReps(), set.getWeight());
+                    fragmentManager.beginTransaction()
+                            //.add(R.id.container_saved_sets, setFragment, UUID.randomUUID().toString())
+                            .add(R.id.container_saved_sets, setFragment, set.getRealmId().toString())
+                            .commit();
+                }
             }
         }
 

@@ -67,6 +67,11 @@ SetFragment.OnFragmentInteractionListener {
                 Log.d(LOG_TAG, workoutRealmResults.size() + " workouts found by searching for realm id " + getIntent().getIntExtra("workoutId", 0));
                 mWorkout = workoutRealmResults.first();
             }
+            //Add the content fragment
+            mLogWorkoutActivityFragment = new LogWorkoutActivityFragment();
+            getFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container_log_workout, mLogWorkoutActivityFragment, "LOG_WORKOUT_ACTIVITY_FRAGMENT")
+                    .commit();
         }
 
         //setContentView(R.layout.activity_log_workout);
@@ -76,10 +81,10 @@ SetFragment.OnFragmentInteractionListener {
         setSupportActionBar(toolbar);
 
         //Add the content fragment
-        mLogWorkoutActivityFragment = new LogWorkoutActivityFragment();
-        getFragmentManager().beginTransaction()
-                .add(R.id.fragment_container_log_workout, mLogWorkoutActivityFragment, "LOG_WORKOUT_ACTIVITY_FRAGMENT")
-                .commit();
+        //mLogWorkoutActivityFragment = new LogWorkoutActivityFragment();
+        //getFragmentManager().beginTransaction()
+        //        .add(R.id.fragment_container_log_workout, mLogWorkoutActivityFragment, "LOG_WORKOUT_ACTIVITY_FRAGMENT")
+        //        .commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
