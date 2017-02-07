@@ -122,6 +122,7 @@ public class EditSetsFragment extends Fragment {
             FragmentManager fragmentManager = getFragmentManager();
             for (Set set : sets) {
                 if (fragmentManager.findFragmentByTag(set.getRealmId().toString()) == null) {
+                    Log.d(LOG_TAG, "No existing fragment was found for set " + set.getRealmId());
                     SetFragment setFragment = SetFragment.newInstance(mExercise, mWorkout, set, set.getReps(), set.getWeight());
                     fragmentManager.beginTransaction()
                             //.add(R.id.container_saved_sets, setFragment, UUID.randomUUID().toString())
