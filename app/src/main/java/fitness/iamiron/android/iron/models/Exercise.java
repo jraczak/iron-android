@@ -2,8 +2,11 @@ package fitness.iamiron.android.iron.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
+import io.realm.Realm;
 import io.realm.RealmObject;
+import io.realm.Sort;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
@@ -114,4 +117,39 @@ public class Exercise extends RealmObject implements Parcelable {
     }
 
     // END GETTERS AND SETTERS
+
+    // CONVENIENCE METHODS
+
+    public int getMostRecentWeight() {
+        Realm realm = Realm.getDefaultInstance();
+
+        //RealmResults<Set> allSets = realm.where(Set.class).findAll();
+        Set set = realm.where(Set.class).equalTo("exercise.id", this.id)
+                .findAllSorted("date", Sort.DESCENDING).first();
+
+        Log.d("Exercise class", "First workout from sort is " +
+                set.getExercise().getName() +
+                " at " +
+                set.getWeight() +
+                " pounds");
+
+        return ((int) set.getWeight());
+    }
+
+    public int getMostRecentReps() {
+        Realm realm = Realm.getDefaultInstance();
+
+        Set set = realm.where(Set.class).equalTo("exercise.id", this.id)
+                .findAllSorted("date", Sort.DESCENDING).first();
+
+        Log.d("Exercise class", "First workout from sort is " +
+                set.getExercise().getName() +
+                " at " +
+                set.getReps() +
+                " pounds");
+
+        return set.getReps();
+    }
+
+    // END CONVENIENCE METHODS
 }

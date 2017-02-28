@@ -1,5 +1,9 @@
 package fitness.iamiron.android.iron;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
@@ -47,6 +51,7 @@ public class DashboardActivity extends AppCompatActivity
     private RealmResults<Workout> mWorkoutRealmResults;
     private ListView mWorkoutListView;
     public Realm mRealm;
+    public Workout mWorkoutForDeletion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -284,28 +289,29 @@ public class DashboardActivity extends AppCompatActivity
         Log.d(TAG, "There were " + mWorkoutRealmResults.size() + " workouts found during activity restart.");
 
         mWorkoutAdapter = new DashboardWorkoutAdapter(this, mWorkoutRealmResults.size(), mWorkoutRealmResults);
-        Log.d(TAG, "Trying to set adapater on listview " + mWorkoutListView);
+        Log.d(TAG, "Trying to set adapter on listview " + mWorkoutListView);
         //mWorkoutListView = (ListView) findViewById(R.id.dashboard_list_workouts_listview);
         mWorkoutListView.setAdapter(mWorkoutAdapter);
         setListViewHeightBasedOnItems(mWorkoutListView);
         mRealm.close();
     }
 
-    // TODO: Figure out how to get this dialog working
-    //public static class ConfirmDeleteWorkoutDialog extends DialogFragment {
-    //    @Override
-    //    public Dialog onCreateDialog(Bundle savedInstanceState) {
-    //        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-//
-    //        dialogBuilder.setMessage(R.string.dialog_confirm_delete_workout);
-    //        dialogBuilder.setPositiveButton(R.string.dialog_confirm_delete_workout,
-    //                new DialogInterface.OnClickListener() {
-    //                    @Override
-    //                    public void onClick(DialogInterface dialog, int which) {
-    //
-    //                    }
-    //                })
-    //    }
-    //}
+
+    public static class ConfirmDeleteWorkoutDialog extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+
+            dialogBuilder.setMessage(R.string.dialog_confirm_delete_workout);
+            dialogBuilder.setPositiveButton(R.string.dialog_confirm_delete_workout,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+            return null;
+        }
+    }
 
 }

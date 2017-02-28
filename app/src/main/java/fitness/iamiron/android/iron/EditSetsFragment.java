@@ -13,8 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.UUID;
-
 import fitness.iamiron.android.iron.models.Exercise;
 import fitness.iamiron.android.iron.models.Set;
 import fitness.iamiron.android.iron.models.Workout;
@@ -92,6 +90,7 @@ public class EditSetsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_sets, container, false);
         mSaveButton = (Button) view.findViewById(R.id.button_save_set);
@@ -100,10 +99,10 @@ public class EditSetsFragment extends Fragment {
         mExerciseNameTextView.setText(mExercise.getName());
         mRepsEditText = (EditText) view.findViewById(R.id.edit_text_reps);
         mRepsEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-        mRepsEditText.setText("0");
+        mRepsEditText.setText(String.valueOf(mExercise.getMostRecentReps()));
         mWeightEditText = (EditText) view.findViewById(R.id.edit_text_weight);
         mWeightEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-        mWeightEditText.setText("0");
+        mWeightEditText.setText(String.valueOf(mExercise.getMostRecentWeight()));
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,10 +121,14 @@ public class EditSetsFragment extends Fragment {
         if (sets.size() > 0) {
             FragmentManager fragmentManager = getFragmentManager();
             for (Set set : sets) {
-                SetFragment setFragment = SetFragment.newInstance(mExercise, mWorkout, set, set.getReps(), set.getWeight());
-                fragmentManager.beginTransaction()
-                        .add(R.id.container_saved_sets, setFragment, UUID.randomUUID().toString())
-                        .commit();
+                if (fragmentManager.findFragmentByTag(set.getRealmId().toString()) == null) {
+                    Log.d(LOG_TAG, "No existing fragment was found for set " + set.getRealmId());
+                    SetFragment setFragment = SetFragment.newInstance(mExercise, mWorkout, set, set.getReps(), set.getWeight());
+                    fragmentManager.beginTransaction()
+                            //.add(R.id.container_saved_sets, setFragment, UUID.randomUUID().toString())
+                            .add(R.id.container_saved_sets, setFragment, set.getRealmId().toString())
+                            .commit();
+                }
             }
         }
 
