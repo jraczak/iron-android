@@ -6,6 +6,7 @@ import android.util.Log;
 
 import io.realm.Realm;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
 import io.realm.Sort;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -122,33 +123,46 @@ public class Exercise extends RealmObject implements Parcelable {
 
     public int getMostRecentWeight() {
         Realm realm = Realm.getDefaultInstance();
+        Set set;
 
         //RealmResults<Set> allSets = realm.where(Set.class).findAll();
-        Set set = realm.where(Set.class).equalTo("exercise.id", this.id)
-                .findAllSorted("date", Sort.DESCENDING).first();
+        RealmResults<Set> sets = realm.where(Set.class).equalTo("exercise.id", this.id)
+                .findAllSorted("date", Sort.DESCENDING);
 
-        Log.d("Exercise class", "First workout from sort is " +
-                set.getExercise().getName() +
-                " at " +
-                set.getWeight() +
-                " pounds");
-
-        return ((int) set.getWeight());
+        if (sets.first() != null) {
+            set = sets.first();
+            Log.d("Exercise class", "First workout from sort is " +
+                    set.getExercise().getName() +
+                    " at " +
+                    set.getWeight() +
+                    " pounds");
+            return ((int) set.getWeight());
+        } else {
+            return 0;
+        }
     }
 
     public int getMostRecentReps() {
         Realm realm = Realm.getDefaultInstance();
+        Set set;
 
-        Set set = realm.where(Set.class).equalTo("exercise.id", this.id)
-                .findAllSorted("date", Sort.DESCENDING).first();
+        RealmResults<Set> sets = realm.where(Set.class).equalTo("exercise.id", this.id)
+                .findAllSorted("date", Sort.DESCENDING);
 
-        Log.d("Exercise class", "First workout from sort is " +
-                set.getExercise().getName() +
-                " at " +
-                set.getReps() +
-                " pounds");
+        if (sets.first() != null) {
+            set = sets.first();
+            Log.d("Exercise class", "First workout from sort is " +
+                    set.getExercise().getName() +
+                    " at " +
+                    set.getReps() +
+                    " pounds");
+            return set.getReps();
+        } else {
+            return 0;
+        }
 
-        return set.getReps();
+
+
     }
 
     // END CONVENIENCE METHODS
