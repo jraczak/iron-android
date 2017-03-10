@@ -129,7 +129,7 @@ public class Exercise extends RealmObject implements Parcelable {
         RealmResults<Set> sets = realm.where(Set.class).equalTo("exercise.id", this.id)
                 .findAllSorted("date", Sort.DESCENDING);
 
-        if (sets.first() != null) {
+        if (!sets.isEmpty()) {
             set = sets.first();
             Log.d("Exercise class", "First workout from sort is " +
                     set.getExercise().getName() +
@@ -149,7 +149,7 @@ public class Exercise extends RealmObject implements Parcelable {
         RealmResults<Set> sets = realm.where(Set.class).equalTo("exercise.id", this.id)
                 .findAllSorted("date", Sort.DESCENDING);
 
-        if (sets.first() != null) {
+        if (!sets.isEmpty()) {
             set = sets.first();
             Log.d("Exercise class", "First workout from sort is " +
                     set.getExercise().getName() +
