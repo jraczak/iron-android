@@ -155,7 +155,7 @@ public class Exercise extends RealmObject implements Parcelable {
                     set.getExercise().getName() +
                     " at " +
                     set.getReps() +
-                    " pounds");
+                    " reps");
             return set.getReps();
         } else {
             return 0;
