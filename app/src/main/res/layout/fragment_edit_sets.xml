@@ -7,13 +7,6 @@
     tools:context="fitness.iamiron.android.iron.EditSetsFragment"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/edit_sets_exercise_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textAllCaps="true"
-        tools:text="Incline Dumbbell Chest Press"/>
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:id="@+id/container_edit_sets_weight_line_linear_layout"
@@ -30,6 +23,8 @@
             android:layout_marginEnd="36dp"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
+            android:background="@color/background_primary"
+            android:textSize="24sp"
             android:text="-"
             />
         <LinearLayout
@@ -70,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
             android:layout_marginEnd="36dp"
-            android:textColor="@android:color/white"
+            android:background="@color/background_primary"
             android:text="+"
             />
     </LinearLayout>
@@ -90,6 +85,7 @@
             android:layout_marginStart="36dp"
             android:layout_marginEnd="36dp"
             android:textColor="@android:color/white"
+            android:background="@color/background_primary"
             android:text="-"/>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -127,6 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
             android:layout_marginEnd="36dp"
+            android:background="@color/background_primary"
             android:textColor="@android:color/white"
             android:text="+"/>
         </LinearLayout>

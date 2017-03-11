@@ -95,8 +95,7 @@ public class EditSetsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_edit_sets, container, false);
         mSaveButton = (Button) view.findViewById(R.id.button_save_set);
         mClearButton = (Button) view.findViewById(R.id.button_clear_edittext_values);
-        mExerciseNameTextView = (TextView) view.findViewById(R.id.edit_sets_exercise_name);
-        mExerciseNameTextView.setText(mExercise.getName());
+
         mRepsEditText = (EditText) view.findViewById(R.id.edit_text_reps);
         mRepsEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
         mRepsEditText.setText(String.valueOf(mExercise.getMostRecentReps()));

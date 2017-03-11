@@ -3,6 +3,7 @@ package fitness.iamiron.android.iron;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,6 +88,8 @@ public class LogWorkoutActivityFragment extends Fragment {
                 Log.d(LOG_TAG, "An existing fragment was found for " + exercise.getName());
             }
         }
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Log Workout");
 
         return view;
 
