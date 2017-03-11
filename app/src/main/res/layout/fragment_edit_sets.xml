@@ -17,15 +17,14 @@
         android:gravity="center_horizontal">
         <Button
             android:id="@+id/button_weight_decrement"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="48dp"
             android:layout_marginStart="36dp"
             android:layout_marginEnd="36dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:textColor="@android:color/white"
-            android:background="@color/background_primary"
-            android:textSize="24sp"
+            android:background="@color/accent"
             android:text="-"
+            android:layout_gravity="center_vertical"
             />
         <LinearLayout
             android:layout_width="wrap_content"
@@ -45,7 +44,7 @@
                 android:maxLines="1"
                 android:maxLength="4"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Display4"
-                android:textSize="32sp"
+                android:textSize="40sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:textColor="@color/primary_text"
@@ -60,12 +59,12 @@
         </LinearLayout>
         <Button
             android:id="@+id/button_weight_increment"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="36dp"
             android:layout_marginEnd="36dp"
-            android:background="@color/background_primary"
+            android:background="@color/accent"
+            android:layout_gravity="center_vertical"
             android:text="+"
             />
     </LinearLayout>
@@ -79,13 +78,13 @@
         android:layout_marginTop="24dp">
         <Button
             android:id="@+id/button_reps_decrement"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
             android:layout_marginEnd="36dp"
+            android:layout_gravity="center_vertical"
             android:textColor="@android:color/white"
-            android:background="@color/background_primary"
+            android:background="@color/accent"
             android:text="-"/>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -104,7 +103,7 @@
             android:maxLength="4"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Display4"
             android:textAlignment="center"
-            android:textSize="32sp"
+            android:textSize="40sp"
             android:textStyle="bold"
             android:textColor="@color/primary_text"
             tools:text="100"
@@ -118,12 +117,12 @@
     </LinearLayout>
         <Button
             android:id="@+id/button_reps_increment"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
             android:layout_marginEnd="36dp"
-            android:background="@color/background_primary"
+            android:layout_gravity="center_vertical"
+            android:background="@color/accent"
             android:textColor="@android:color/white"
             android:text="+"/>
         </LinearLayout>
