@@ -144,7 +144,7 @@ SetFragment.OnFragmentInteractionListener {
                 .replace(R.id.fragment_container_log_workout, editSetsFragment, "EDIT_SETS_FRAGMENT")
                 .addToBackStack("add_edit_sets_fragment")
                 .commit();
-        return;
+        getSupportActionBar().setTitle(exercise.getName());
     }
 
     public void onSetsSaved(Exercise exercise, Workout workout, int reps, float weight) {
