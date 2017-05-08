@@ -157,7 +157,7 @@
  },
  {
    "id": 23,
-   "name": "Hammer Strength Shoulder Press",
+   "name": "Machine Shoulder Press",
    "primaryMuscles": "shoulders",
    "secondaryMuscles": "",
    "equipment": ""
@@ -411,6 +411,13 @@
    "id": 59,
    "name": "Machine Push Down",
    "primaryMuscles": "triceps",
+   "secondaryMuscles": "",
+   "equipment": ""
+ },
+ {
+   "id": 60,
+   "name": "Behind Neck Push Press",
+   "primaryMuscles": "shoulders",
    "secondaryMuscles": "",
    "equipment": ""
  }
