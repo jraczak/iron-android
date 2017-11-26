@@ -3,6 +3,6 @@
 
     <style name="IronTheme" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@color/background_primary</item>
-        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textColor">@color/light_text</item>
     </style>
 </resources>

@@ -27,13 +27,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="REPS"
-                android:textColor="@color/primary_text"/>
+                android:textColor="@color/light_text"/>
             <TextView
                 android:id="@+id/rep_count"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/hello_blank_fragment"
-                android:textColor="@color/primary_text"/>
+                android:textColor="@color/light_text"/>
         </LinearLayout>
 
         <LinearLayout
@@ -45,13 +45,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="WEIGHT (LBS)"
-                android:textColor="@color/primary_text"/>
+                android:textColor="@color/light_text"/>
             <TextView
                 android:id="@+id/weight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/hello_blank_fragment"
-                android:textColor="@color/primary_text"/>
+                android:textColor="@color/light_text"/>
         </LinearLayout>
     </LinearLayout>
 
